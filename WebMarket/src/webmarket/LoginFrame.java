@@ -308,7 +308,7 @@ public class LoginFrame extends javax.swing.JFrame {
         }
         
         else {
-            String message = "Ο αριθμός κάρτας μέλους ή ο κωδικός είναι λάθος";
+            String message = "Ο Αριθμός κάρτας μέλους ή ο Κωδικός εισόδου είναι λάθος";
             JOptionPane.showMessageDialog(rootPane ,message,"                   Προσοχή !",2);
         }    
     
