@@ -304,14 +304,20 @@ public class LoginFrame extends javax.swing.JFrame {
             mainadmin.setVisible(true);
             // Καταργούμε το login
             dispose();
-        
         }
-        
+        // Αναγνωρίζει τους απλούς χρήστες και πάει στο ανάλογο μενού
+        else { 
+        if ((user).equals("111-111") && (pwd).equals("user")){
+            UserFrame mainuser = new UserFrame();
+            mainuser.setVisible(true);
+            // Καταργούμε το login
+            dispose();
+        }
+        // Βγάζει σφάλμα αν δεν αναγνωρίσει κανέναν χρήστη
         else {
             String message = "Ο Αριθμός κάρτας μέλους ή ο Κωδικός εισόδου είναι λάθος";
             JOptionPane.showMessageDialog(rootPane ,message,"                   Προσοχή !",2);
-        }    
-    
+        }}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
