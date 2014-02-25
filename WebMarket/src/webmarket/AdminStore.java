@@ -40,7 +40,7 @@ public class AdminStore extends javax.swing.JFrame {
         jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("WebMarket - Διαχείριση καταστημάτων");
+        setTitle("WebMarket - Διαχείριση καταστημάτων (administrator)");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,6 +120,8 @@ public class AdminStore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        AdminFrame mainadmin = new AdminFrame();
+        mainadmin.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
