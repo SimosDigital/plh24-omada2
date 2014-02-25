@@ -54,6 +54,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("WebMarket - Login");
         setAlwaysOnTop(true);
         setResizable(false);
 
@@ -157,7 +158,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel9.setText("Στείλτε mail στην ηλεκτρονική διεύθυνση :");
 
         jLabel10.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel10.setText("support@supermarket.gr");
+        jLabel10.setText("support@webmarket.gr");
 
         jLabel11.setText("Με το όνομα και το επώνυμό σας.");
 
