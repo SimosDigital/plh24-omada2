@@ -4,11 +4,29 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>externalmodel.CreditCardAuthority</class>
     <class>externalmodel.ExternalBank</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://plh24.ecomet.eap.gr:8080/CREDIT_CARD_AUTH_DB"/>
       <property name="javax.persistence.jdbc.password" value="studentpass"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.user" value="student"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="modelPU2" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>model.BonusCheck</class>
+    <class>model.Customer</class>
+    <class>model.Product</class>
+    <class>model.ProductPurchase</class>
+    <class>model.Purchase</class>
+    <class>model.Store</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/webmarket_db"/>
+      <property name="javax.persistence.jdbc.password" value="omada2"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.user" value="omada2"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>
