@@ -7,7 +7,7 @@
 package externalmodel;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,7 +42,7 @@ public class ExternalBank implements Serializable {
     @Column(name = "NAME")
     private String name;
     @OneToMany(mappedBy = "bank")
-    private Collection<CreditCardAuthority> creditCardAuthorityCollection;
+    private List<CreditCardAuthority> creditCardAuthorityList;
 
     public ExternalBank() {
     }
@@ -68,12 +68,12 @@ public class ExternalBank implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CreditCardAuthority> getCreditCardAuthorityCollection() {
-        return creditCardAuthorityCollection;
+    public List<CreditCardAuthority> getCreditCardAuthorityList() {
+        return creditCardAuthorityList;
     }
 
-    public void setCreditCardAuthorityCollection(Collection<CreditCardAuthority> creditCardAuthorityCollection) {
-        this.creditCardAuthorityCollection = creditCardAuthorityCollection;
+    public void setCreditCardAuthorityList(List<CreditCardAuthority> creditCardAuthorityList) {
+        this.creditCardAuthorityList = creditCardAuthorityList;
     }
 
     @Override

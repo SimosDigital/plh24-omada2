@@ -9,8 +9,8 @@ package model;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -20,101 +20,98 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author user0
+ * @author Simos
  */
 @Entity
 @Table(name = "PRODUCT_PURCHASE")
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery(name = "ProductPurchase.findAll", query = "SELECT p FROM ProductPurchase p"),
-	@NamedQuery(name = "ProductPurchase.findByPurchaseId", query = "SELECT p FROM ProductPurchase p WHERE p.productPurchasePK.purchaseId = :purchaseId"),
-	@NamedQuery(name = "ProductPurchase.findByProductId", query = "SELECT p FROM ProductPurchase p WHERE p.productPurchasePK.productId = :productId"),
-	@NamedQuery(name = "ProductPurchase.findByQuantity", query = "SELECT p FROM ProductPurchase p WHERE p.quantity = :quantity")})
+    @NamedQuery(name = "ProductPurchase.findAll", query = "SELECT p FROM ProductPurchase p"),
+    @NamedQuery(name = "ProductPurchase.findByProductPurchaseId", query = "SELECT p FROM ProductPurchase p WHERE p.productPurchaseId = :productPurchaseId"),
+    @NamedQuery(name = "ProductPurchase.findByQuantity", query = "SELECT p FROM ProductPurchase p WHERE p.quantity = :quantity")})
 public class ProductPurchase implements Serializable {
-	private static final long serialVersionUID = 1L;
-	@EmbeddedId
-	protected ProductPurchasePK productPurchasePK;
-	@Basic(optional = false)
-        @Column(name = "QUANTITY")
-	private int quantity;
-	@JoinColumn(name = "PURCHASE_ID", referencedColumnName = "PURCHASE_ID", insertable = false, updatable = false)
-        @ManyToOne(optional = false)
-	private Purchase purchase;
-	@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID", insertable = false, updatable = false)
-        @ManyToOne(optional = false)
-	private Product product;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "PRODUCT_PURCHASE_ID")
+    private Integer productPurchaseId;
+    @Basic(optional = false)
+    @Column(name = "QUANTITY")
+    private int quantity;
+    @JoinColumn(name = "PURCHASE_ID", referencedColumnName = "PURCHASE_ID")
+    @ManyToOne(optional = false)
+    private Purchase purchaseId;
+    @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")
+    @ManyToOne(optional = false)
+    private Product productId;
 
-	public ProductPurchase() {
-	}
+    public ProductPurchase() {
+    }
 
-	public ProductPurchase(ProductPurchasePK productPurchasePK) {
-		this.productPurchasePK = productPurchasePK;
-	}
+    public ProductPurchase(Integer productPurchaseId) {
+        this.productPurchaseId = productPurchaseId;
+    }
 
-	public ProductPurchase(ProductPurchasePK productPurchasePK, int quantity) {
-		this.productPurchasePK = productPurchasePK;
-		this.quantity = quantity;
-	}
+    public ProductPurchase(Integer productPurchaseId, int quantity) {
+        this.productPurchaseId = productPurchaseId;
+        this.quantity = quantity;
+    }
 
-	public ProductPurchase(int purchaseId, int productId) {
-		this.productPurchasePK = new ProductPurchasePK(purchaseId, productId);
-	}
+    public Integer getProductPurchaseId() {
+        return productPurchaseId;
+    }
 
-	public ProductPurchasePK getProductPurchasePK() {
-		return productPurchasePK;
-	}
+    public void setProductPurchaseId(Integer productPurchaseId) {
+        this.productPurchaseId = productPurchaseId;
+    }
 
-	public void setProductPurchasePK(ProductPurchasePK productPurchasePK) {
-		this.productPurchasePK = productPurchasePK;
-	}
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public int getQuantity() {
-		return quantity;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public Purchase getPurchaseId() {
+        return purchaseId;
+    }
 
-	public Purchase getPurchase() {
-		return purchase;
-	}
+    public void setPurchaseId(Purchase purchaseId) {
+        this.purchaseId = purchaseId;
+    }
 
-	public void setPurchase(Purchase purchase) {
-		this.purchase = purchase;
-	}
+    public Product getProductId() {
+        return productId;
+    }
 
-	public Product getProduct() {
-		return product;
-	}
+    public void setProductId(Product productId) {
+        this.productId = productId;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (productPurchaseId != null ? productPurchaseId.hashCode() : 0);
+        return hash;
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (productPurchasePK != null ? productPurchasePK.hashCode() : 0);
-		return hash;
-	}
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof ProductPurchase)) {
+            return false;
+        }
+        ProductPurchase other = (ProductPurchase) object;
+        if ((this.productPurchaseId == null && other.productPurchaseId != null) || (this.productPurchaseId != null && !this.productPurchaseId.equals(other.productPurchaseId))) {
+            return false;
+        }
+        return true;
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof ProductPurchase)) {
-			return false;
-		}
-		ProductPurchase other = (ProductPurchase) object;
-		if ((this.productPurchasePK == null && other.productPurchasePK != null) || (this.productPurchasePK != null && !this.productPurchasePK.equals(other.productPurchasePK))) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "model.ProductPurchase[ productPurchasePK=" + productPurchasePK + " ]";
-	}
-	
+    @Override
+    public String toString() {
+        return "model.ProductPurchase[ productPurchaseId=" + productPurchaseId + " ]";
+    }
+    
 }
