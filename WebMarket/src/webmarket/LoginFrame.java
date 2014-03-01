@@ -1,23 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Customer;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
- *
  * @author Simos
  */
+
 public class LoginFrame extends javax.swing.JFrame {
+    
+    // Εδώ ορίζουμε όνομα και pwd για τον διαχειριστή
+    private final String adminUser = "admin";
+    private final String adminPwd = "admin";
+    // Εδώ ορίζουμε μεταβλητές για τον EntityManager
+    private static EntityManager em;
+    private javax.persistence.Query query1;
+    private Customer logedUser;
 
     /**
      * Creates new form LoginFrame
      */
+    
     public LoginFrame() {
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+        // Δημιουργία του Entity Manager
+        em = emf.createEntityManager();        
         initComponents();
     }
 
@@ -34,8 +45,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        cardNumberText = new javax.swing.JTextField();
+        passwordText = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -69,18 +80,18 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel7.setText("Κωδικός εισόδου :");
 
-        jTextField1.setToolTipText("");
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextField1.setName(""); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        cardNumberText.setToolTipText("");
+        cardNumberText.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        cardNumberText.setName(""); // NOI18N
+        cardNumberText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                cardNumberTextActionPerformed(evt);
             }
         });
 
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        passwordText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                passwordTextActionPerformed(evt);
             }
         });
 
@@ -115,8 +126,8 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(37, 37, 37)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
-                    .addComponent(jPasswordField1)
+                    .addComponent(cardNumberText)
+                    .addComponent(passwordText)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 19, Short.MAX_VALUE)
                         .addComponent(jButton2)))
@@ -134,11 +145,11 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cardNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -146,7 +157,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(61, 61, 61))
         );
 
-        jTextField1.getAccessibleContext().setAccessibleName("");
+        cardNumberText.getAccessibleContext().setAccessibleName("");
 
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 400));
@@ -283,9 +294,9 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void cardNumberTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardNumberTextActionPerformed
 
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_cardNumberTextActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         System.exit(0);
@@ -296,24 +307,29 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String user = jTextField1.getText();
-        String pwd = jPasswordField1.getText();
+        String user = cardNumberText.getText();
+        String pwd = passwordText.getText();
         
         // Αναγνωρίζει τον admin και πάει στο ανάλογο μενού
-        if ((user).equals("000-000") && (pwd).equals("admin")){
+        if ((user).equals(adminUser) && (pwd).equals(adminPwd)){
             AdminFrame mainadmin = new AdminFrame();
             mainadmin.setVisible(true);
-            // Καταργούμε το login
-            dispose();
+            dispose();      // Καταργούμε το login
         }
         // Αναγνωρίζει τους απλούς χρήστες και πάει στο ανάλογο μενού
-        else { 
-        if ((user).equals("111-111") && (pwd).equals("user")){
-            UserFrame mainuser = new UserFrame();
+        else {
+            query1 = em.createQuery("select u from Customer u where u.pointsCardNumber=:pointsCardNumber and u.password=:password");
+            query1.setParameter("pointsCardNumber", user).setParameter("password", pwd);
+            List<Customer> results = query1.getResultList();
+        
+            if (results.size() ==1) {
+                logedUser = results.get(0);
+                
+                UserFrame mainuser = new UserFrame();
+                mainuser.setLogedUser(logedUser);
             mainuser.setVisible(true);
-            // Καταργούμε το login
-            dispose();
-        }
+            dispose();     // Καταργούμε το login
+            }
         // Βγάζει σφάλμα αν δεν αναγνωρίσει κανέναν χρήστη
         else {
             String message = "Ο Αριθμός κάρτας μέλους ή ο Κωδικός εισόδου είναι λάθος";
@@ -321,9 +337,9 @@ public class LoginFrame extends javax.swing.JFrame {
         }}
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_passwordTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,6 +377,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cardNumberText;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -381,7 +398,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField passwordText;
     // End of variables declaration//GEN-END:variables
 }
