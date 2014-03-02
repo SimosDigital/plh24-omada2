@@ -4,18 +4,40 @@ package webmarket;
  * @author Simos
  */
 
+import java.util.List;
+import java.util.Random;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import model.Customer;
 
 public class AdminNewUser extends javax.swing.JFrame {
-
+    
+    private static EntityManager em;
+    private javax.persistence.Query query1;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String password;
+    private String address;
+    private String creditnumber;
+    private String creditowner;
+    private String creditcvv;
+    private String creditbank;
+    private Customer newcustomer = new Customer();
+ 
     /**
      * Creates new form AdminNewUser
      */
     
     public AdminNewUser() {
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+        // Δημιουργία του Entity Manager
+        em = emf.createEntityManager();        
         initComponents();
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,24 +53,24 @@ public class AdminNewUser extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        firstNameText = new javax.swing.JTextField();
+        lastNameText = new javax.swing.JTextField();
+        emailText = new javax.swing.JTextField();
+        passwordText = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        addressText = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        choice1 = new java.awt.Choice();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        creditNumberText = new javax.swing.JTextField();
+        creditOwnerText = new javax.swing.JTextField();
+        creditCvvText = new javax.swing.JTextField();
+        creditBankComboBox = new javax.swing.JComboBox();
+        OkButton = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση πελατών (administrator)");
@@ -66,14 +88,6 @@ public class AdminNewUser extends javax.swing.JFrame {
 
         jLabel5.setText("password");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-
-        jTextField4.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -84,7 +98,7 @@ public class AdminNewUser extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                        .addComponent(passwordText, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -92,9 +106,9 @@ public class AdminNewUser extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField1))))
+                            .addComponent(emailText, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(lastNameText)
+                            .addComponent(firstNameText))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -103,27 +117,25 @@ public class AdminNewUser extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(firstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Προαιρετικά", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
         jLabel6.setText("Διεύθυνση");
-
-        jTextField5.setText("jTextField5");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Στοιχεία πιστωτικής κάρτας", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
@@ -135,13 +147,8 @@ public class AdminNewUser extends javax.swing.JFrame {
 
         jLabel10.setText("Τράπεζα");
 
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
-
-        choice1.setName(""); // NOI18N
+        creditBankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NBG", "EUROBANK", "ALPHA", "CITIBANK", "ΠΕΙΡΑΙΩΣ", "ΚΥΠΡΟΥ" }));
+        creditBankComboBox.setToolTipText("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,12 +162,11 @@ public class AdminNewUser extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addComponent(jTextField6)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(creditOwnerText)
+                    .addComponent(creditCvvText, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creditBankComboBox, 0, 177, Short.MAX_VALUE)
+                    .addComponent(creditNumberText))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -169,20 +175,20 @@ public class AdminNewUser extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(creditNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creditOwnerText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creditCvvText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(creditBankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -190,15 +196,14 @@ public class AdminNewUser extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,23 +211,23 @@ public class AdminNewUser extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Εισαγωγή");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        OkButton.setText("Εισαγωγή");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                OkButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Ακύρωση");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setText("Ακύρωση");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -231,7 +236,7 @@ public class AdminNewUser extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(39, Short.MAX_VALUE)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,9 +247,9 @@ public class AdminNewUser extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(199, 199, 199)
-                .addComponent(jButton1)
+                .addComponent(OkButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(ExitButton)
                 .addGap(208, 208, 208))
         );
         layout.setVerticalGroup(
@@ -256,36 +261,96 @@ public class AdminNewUser extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(OkButton)
+                    .addComponent(ExitButton))
                 .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String message = "Ο νέος πελάτης θα έχει κάρτα πόντων με αριθμό :";
-        String cardid = "123-456";
-        JOptionPane.showMessageDialog(rootPane ,message + cardid ,"Επιτυχής εισαγωγή νέου πελάτη",1);
-        JOptionPane.showMessageDialog(rootPane ,"Υπάρχει ήδη πελάτης με αυτό το email."
-            + " Στείλτε του τον αριθμό της κάρτας του." ,"                   Προσοχή !",2);
-        AdminUser adminuser = new AdminUser();
-        adminuser.setLocationRelativeTo(null);
-        adminuser.setVisible(true);
-        dispose();
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+        firstname = firstNameText.getText();
+        lastname = lastNameText.getText();
+        email = emailText.getText();
+        password = passwordText.getText();
+        
+        // Ελέγχουμε αν υπάρχουν τα υποχρεωτικά πεδία
+        if ((firstname).equals("") || (lastname).equals("") || (email).equals("") || (password).equals("")){
+            JOptionPane.showMessageDialog(rootPane ,"Συμπληρώστε τα υποχρεωτικά πεδία" ,"             Προσοχή !",2);  
+        }
+        else {
+            // Ελέγχουμε αν υπάρχει ήδη πελάτης με αυτό το email.
+            // Αν υπάρχει εμφανίζουμε τα στοιχεία του.
+            query1 = em.createQuery("select u from Customer u where u.email=:email");
+            query1.setParameter("email", email);
+            List<Customer> results = query1.getResultList();
+            if (results.size() ==1) {
+                JOptionPane.showMessageDialog(rootPane ,"Υπάρχει ήδη πελάτης με αυτό το email. \n"
+                  + "Στείλτε του τα στοιχεία εισόδου: \n Αριθμός κάρτας πόντων : " + results.get(0).getPointsCardNumber()
+                  + "\n Password : " + results.get(0).getPassword(),"             Προσοχή !",2);
+            }
+            // Δεν υπάρχει ήδη ο πελάτης άρα τον καταχωρούμε στη βάση.
+            else {
+                address = addressText.getText();
+                creditnumber = creditNumberText.getText();
+                creditowner = creditOwnerText.getText();
+                creditcvv = creditCvvText.getText();
+                creditbank = creditBankComboBox.getSelectedItem().toString();
+                String cardNumber;
+             
+                do {
+                    // Χρησιμοποιώντας τη μέθοδο randInt παράγει 2 τυχαίους τριψήφιους αριθμούς.
+                    String firstTriplet = Integer.toString(randInt(100,999));
+                    String secondTriplet = Integer.toString(randInt(100,999));
+                    cardNumber = firstTriplet + "-" + secondTriplet;
+                    // Εξασφαλίζουμε ότι ο αριθμός κάρτας δεν υπάρχει ήδη στη βάση δεδομένων.
+                    query1 = em.createQuery("select u from Customer u where u.pointsCardNumber=:pointsCardNumber");
+                    query1.setParameter("pointsCardNumber", cardNumber);
+                    results = query1.getResultList();
+                } while (results.size() == 1);
+             
+                newcustomer.setCustomerId(1);
+                newcustomer.setFirstName(firstname);
+                newcustomer.setLastName(lastname);
+                newcustomer.setEmail(email);
+                newcustomer.setPassword(password);
+                newcustomer.setAddress(address);
+                newcustomer.setCreditCardNumber(creditnumber);
+                newcustomer.setCreditCardOwnerName(creditowner);
+                newcustomer.setCreditCardCvv(creditcvv);
+                newcustomer.setCreditCardBank(creditbank);
+                newcustomer.setAvailablePoints(0);
+                newcustomer.setPointsCardNumber(cardNumber);
+             
+                //Αποθηκεύουμε το αντικείμενο Customer στη βάση δεδομένων
+                em.getTransaction().begin();
+                try {
+                    em.persist(newcustomer);            
+                    em.getTransaction().commit();
+                    String message = "Ο νέος πελάτης θα έχει κάρτα πόντων \n με αριθμό :" + cardNumber;
+                    JOptionPane.showMessageDialog(rootPane ,message ,"Επιτυχής εισαγωγή νέου πελάτη",1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    em.getTransaction().rollback();
+                }
+            }
+            AdminUser adminuser = new AdminUser();
+            adminuser.setLocationRelativeTo(null);
+            adminuser.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_OkButtonActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         JOptionPane.showMessageDialog(rootPane ,"Η εισαγωγή ακυρώθηκε","               Προσοχή !",2);
         AdminUser adminuser = new AdminUser();
         adminuser.setLocationRelativeTo(null);
         adminuser.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -323,9 +388,15 @@ public class AdminNewUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Choice choice1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton OkButton;
+    private javax.swing.JTextField addressText;
+    private javax.swing.JComboBox creditBankComboBox;
+    private javax.swing.JTextField creditCvvText;
+    private javax.swing.JTextField creditNumberText;
+    private javax.swing.JTextField creditOwnerText;
+    private javax.swing.JTextField emailText;
+    private javax.swing.JTextField firstNameText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -339,13 +410,19 @@ public class AdminNewUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField lastNameText;
+    private javax.swing.JTextField passwordText;
     // End of variables declaration//GEN-END:variables
+    
+    /**
+    * Επιστρέφει ένα ψευδο-τυχαίο αριθμό μεταξύ min και max.    * 
+    * @param min Η ελάχιστη τιμή
+    * @param max Η μέγιστη τιμή η οποία πρέπει να είναι μεγαλύτερη από τη Min.
+    * @return Ακέραιο μεταξύ min και max.    * 
+    */
+    private int randInt(int min, int max) {       
+       Random rand = new Random();       
+       int randomNum = rand.nextInt((max - min) + 1) + min;
+       return randomNum;
+    }
 }
