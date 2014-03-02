@@ -26,11 +26,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-              <Component id="jButton1" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <Component id="ChangeButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-              <Component id="jButton2" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <Component id="DeleteButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton3" linkSize="1" min="-2" max="-2" attributes="0"/>
+              <Component id="ExitButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -103,9 +103,9 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton2" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton3" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="DeleteButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ExitButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ChangeButton" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
           </Group>
@@ -113,25 +113,28 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="ChangeButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x3a4;&#x3c1;&#x3bf;&#x3c0;&#x3bf;&#x3c0;&#x3bf;&#x3af;&#x3b7;&#x3c3;&#x3b7;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="DeleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x394;&#x3b9;&#x3b1;&#x3b3;&#x3c1;&#x3b1;&#x3c6;&#x3ae;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteButtonActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="ExitButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x3a0;&#x3af;&#x3c3;&#x3c9;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

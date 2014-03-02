@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
+
+/**
+ * @author Simos
+ */
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Simos
- */
 public class AdminNewUser extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminNewUser
      */
+    
     public AdminNewUser() {
         initComponents();
     }
@@ -278,6 +273,7 @@ public class AdminNewUser extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane ,"Υπάρχει ήδη πελάτης με αυτό το email."
             + " Στείλτε του τον αριθμό της κάρτας του." ,"                   Προσοχή !",2);
         AdminUser adminuser = new AdminUser();
+        adminuser.setLocationRelativeTo(null);
         adminuser.setVisible(true);
         dispose();
 
@@ -286,6 +282,7 @@ public class AdminNewUser extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showMessageDialog(rootPane ,"Η εισαγωγή ακυρώθηκε","               Προσοχή !",2);
         AdminUser adminuser = new AdminUser();
+        adminuser.setLocationRelativeTo(null);
         adminuser.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

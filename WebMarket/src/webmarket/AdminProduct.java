@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
 /**
- *
  * @author Simos
  */
+
 public class AdminProduct extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminProduct
      */
+    
     public AdminProduct() {
         initComponents();
     }
@@ -32,7 +27,7 @@ public class AdminProduct extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -57,10 +52,10 @@ public class AdminProduct extends javax.swing.JFrame {
 
         jButton1.setText("Νέο");
 
-        jButton4.setText("Πίσω");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setText("Πίσω");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -89,12 +84,12 @@ public class AdminProduct extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(105, 105, 105)
-                        .addComponent(jButton4)
+                        .addComponent(ExitButton)
                         .addGap(33, 33, 33)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3, jButton4});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ExitButton, jButton1, jButton2, jButton3});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,18 +103,19 @@ public class AdminProduct extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(ExitButton))
                 .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         AdminFrame mainadmin = new AdminFrame();
+        mainadmin.setLocationRelativeTo(null);
         mainadmin.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,10 +153,10 @@ public class AdminProduct extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExitButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

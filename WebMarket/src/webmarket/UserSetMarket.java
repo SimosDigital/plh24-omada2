@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
 /**
- *
  * @author Simos
  */
+
 public class UserSetMarket extends javax.swing.JFrame {
 
     /**
      * Creates new form UserSetMarket
      */
+
     public UserSetMarket() {
         initComponents();
     }
@@ -28,36 +23,36 @@ public class UserSetMarket extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
         list1 = new java.awt.List();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        UserQuantitySelectButton = new javax.swing.JButton();
+        UserBasketButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Αγορά προϊόντων");
 
-        jButton1.setText("Πίσω");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setText("Πίσω");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Επιλέξτε προϊόντα");
 
-        jButton2.setText("Προσθήκη στο καλάθι");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        UserQuantitySelectButton.setText("Προσθήκη στο καλάθι");
+        UserQuantitySelectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                UserQuantitySelectButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Μετάβαση στο καλάθι");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        UserBasketButton.setText("Μετάβαση στο καλάθι");
+        UserBasketButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                UserBasketButtonActionPerformed(evt);
             }
         });
 
@@ -67,11 +62,11 @@ public class UserSetMarket extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(81, 81, 81)
-                .addComponent(jButton2)
+                .addComponent(UserQuantitySelectButton)
                 .addGap(141, 141, 141)
-                .addComponent(jButton3)
+                .addComponent(UserBasketButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(ExitButton)
                 .addGap(80, 80, 80))
             .addGroup(layout.createSequentialGroup()
                 .addGap(336, 336, 336)
@@ -91,32 +86,35 @@ public class UserSetMarket extends javax.swing.JFrame {
                 .addComponent(list1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(ExitButton)
+                    .addComponent(UserQuantitySelectButton)
+                    .addComponent(UserBasketButton))
                 .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserMarket usermarket = new UserMarket();
+        usermarket.setLocationRelativeTo(null);
         usermarket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void UserQuantitySelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserQuantitySelectButtonActionPerformed
         UserQuantitySelect userquantityselect = new UserQuantitySelect();
+        userquantityselect.setLocationRelativeTo(null);
         userquantityselect.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_UserQuantitySelectButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void UserBasketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserBasketButtonActionPerformed
         UserBasket userbasket = new UserBasket();
+        userbasket.setLocationRelativeTo(null);
         userbasket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_UserBasketButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,9 +152,9 @@ public class UserSetMarket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton UserBasketButton;
+    private javax.swing.JButton UserQuantitySelectButton;
     private javax.swing.JLabel jLabel1;
     private java.awt.List list1;
     // End of variables declaration//GEN-END:variables

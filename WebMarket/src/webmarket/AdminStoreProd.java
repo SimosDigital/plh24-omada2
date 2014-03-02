@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
 /**
- *
  * @author Simos
  */
+
 public class AdminStoreProd extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminStoreProd
      */
+
     public AdminStoreProd() {
         initComponents();
     }
@@ -72,6 +67,7 @@ public class AdminStoreProd extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         AdminFrame mainadmin = new AdminFrame();
+        mainadmin.setLocationRelativeTo(null);
         mainadmin.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed

@@ -1,5 +1,9 @@
 package webmarket;
 
+/**
+ * @author Simos
+ */
+
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Customer;
@@ -7,14 +11,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * @author Simos
- */
-
 public class LoginFrame extends javax.swing.JFrame {
     
     // Εδώ ορίζουμε όνομα και pwd για τον διαχειριστή
-    private final String adminUser = "admin";
+    private final String adminUser = "000-000";
     private final String adminPwd = "admin";
     // Εδώ ορίζουμε μεταβλητές για τον EntityManager
     private static EntityManager em;
@@ -47,8 +47,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         cardNumberText = new javax.swing.JTextField();
         passwordText = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        LoginButton = new javax.swing.JButton();
+        ExitButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -59,7 +59,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        ExitButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -68,6 +68,11 @@ public class LoginFrame extends javax.swing.JFrame {
         setTitle("WebMarket - Login");
         setAlwaysOnTop(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
@@ -95,17 +100,17 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Είσοδος");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        LoginButton.setText("Είσοδος");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LoginButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Έξοδος");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton1.setText("Έξοδος");
+        ExitButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ExitButton1ActionPerformed(evt);
             }
         });
 
@@ -123,14 +128,14 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(LoginButton)
                         .addGap(37, 37, 37)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardNumberText)
                     .addComponent(passwordText)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 19, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(ExitButton1)))
                 .addGap(99, 99, 99))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(146, 146, 146)
@@ -152,8 +157,8 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(LoginButton)
+                    .addComponent(ExitButton1))
                 .addGap(61, 61, 61))
         );
 
@@ -181,10 +186,10 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jLabel15.setText("Αριθμός κάρτας μέλους και κωδικός εισόδου");
 
-        jButton3.setText("Έξοδος");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton2.setText("Έξοδος");
+        ExitButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ExitButton2ActionPerformed(evt);
             }
         });
 
@@ -214,7 +219,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(ExitButton2)
                 .addGap(69, 69, 69))
         );
         jPanel2Layout.setVerticalGroup(
@@ -239,7 +244,7 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addGap(37, 37, 37)
-                .addComponent(jButton3)
+                .addComponent(ExitButton2)
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -298,21 +303,22 @@ public class LoginFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cardNumberTextActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ExitButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButton2ActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ExitButton2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ExitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButton1ActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ExitButton1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         String user = cardNumberText.getText();
         String pwd = passwordText.getText();
         
         // Αναγνωρίζει τον admin και πάει στο ανάλογο μενού
         if ((user).equals(adminUser) && (pwd).equals(adminPwd)){
             AdminFrame mainadmin = new AdminFrame();
+            mainadmin.setLocationRelativeTo(null);
             mainadmin.setVisible(true);
             dispose();      // Καταργούμε το login
         }
@@ -326,20 +332,26 @@ public class LoginFrame extends javax.swing.JFrame {
                 logedUser = results.get(0);
                 
                 UserFrame mainuser = new UserFrame();
+                mainuser.setLocationRelativeTo(null);
                 mainuser.setLogedUser(logedUser);
-            mainuser.setVisible(true);
-            dispose();     // Καταργούμε το login
+                mainuser.setVisible(true);
+                dispose();     // Καταργούμε το login
             }
-        // Βγάζει σφάλμα αν δεν αναγνωρίσει κανέναν χρήστη
-        else {
-            String message = "Ο Αριθμός κάρτας μέλους ή ο Κωδικός εισόδου είναι λάθος";
-            JOptionPane.showMessageDialog(rootPane ,message,"                   Προσοχή !",2);
-        }}
-    }//GEN-LAST:event_jButton1ActionPerformed
+            // Βγάζει σφάλμα αν δεν αναγνωρίσει κανέναν χρήστη
+            else {
+                String message = "Ο Αριθμός κάρτας μέλους ή ο Κωδικός εισόδου είναι λάθος";
+                JOptionPane.showMessageDialog(rootPane ,message,"                   Προσοχή !",2);
+            }
+        }
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTextActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -377,10 +389,10 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExitButton1;
+    private javax.swing.JButton ExitButton2;
+    private javax.swing.JButton LoginButton;
     private javax.swing.JTextField cardNumberText;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
