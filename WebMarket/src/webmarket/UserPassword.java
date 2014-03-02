@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
+
+/**
+ * @author Simos
+ */
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Simos
- */
 public class UserPassword extends javax.swing.JFrame {
 
     /**
      * Creates new form UserPassword
      */
+
     public UserPassword() {
         initComponents();
     }
@@ -37,8 +32,8 @@ public class UserPassword extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
         jPasswordField3 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        OkButton = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση Προφίλ");
@@ -51,17 +46,17 @@ public class UserPassword extends javax.swing.JFrame {
 
         jLabel4.setText("Νέος κωδικός");
 
-        jButton1.setText("Αλλαγή");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        OkButton.setText("Αλλαγή");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                OkButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Άκυρο");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setText("Άκυρο");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -91,9 +86,9 @@ public class UserPassword extends javax.swing.JFrame {
                                         .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                                         .addComponent(jPasswordField2))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(OkButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                                .addComponent(jButton2)))))
+                                .addComponent(ExitButton)))))
                 .addGap(82, 82, 82))
         );
         layout.setVerticalGroup(
@@ -115,28 +110,30 @@ public class UserPassword extends javax.swing.JFrame {
                     .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(OkButton)
+                    .addComponent(ExitButton))
                 .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserProfile userprofile = new UserProfile();
+        userprofile.setLocationRelativeTo(null);
         userprofile.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
         JOptionPane.showMessageDialog(rootPane ,"Δώσατε λάθος τον παλιό σας κωδικό" ,"     Προσοχή !",2);
         JOptionPane.showMessageDialog(rootPane ,"Ο νέος κωδικός πρέπει να γραφεί ίδιος 2 φορές","     Προσοχή !",2);
         JOptionPane.showMessageDialog(rootPane ,"Ο νέος κωδικός πρέπει να είναι από 8 ως 16 χαρακτήρες","     Προσοχή !",2);
         UserProfile userprofile = new UserProfile();
+        userprofile.setLocationRelativeTo(null);
         userprofile.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_OkButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,8 +171,8 @@ public class UserPassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton OkButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

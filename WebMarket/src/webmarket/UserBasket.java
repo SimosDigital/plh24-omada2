@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
 /**
- *
  * @author Simos
  */
+
 public class UserBasket extends javax.swing.JFrame {
 
     /**
      * Creates new form UserBasket
      */
+
     public UserBasket() {
         initComponents();
     }
@@ -28,7 +23,7 @@ public class UserBasket extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -41,15 +36,15 @@ public class UserBasket extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jButton2 = new javax.swing.JButton();
+        MakePurchaseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Αγορά προϊόντων");
 
-        jButton1.setText("Πίσω");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setText("Πίσω");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -89,7 +84,12 @@ public class UserBasket extends javax.swing.JFrame {
 
         jRadioButton2.setText("Παραλαβή από το κατάστημα");
 
-        jButton2.setText("Ολοκλήρωση αγοράς");
+        MakePurchaseButton.setText("Ολοκλήρωση αγοράς");
+        MakePurchaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MakePurchaseButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,9 +103,9 @@ public class UserBasket extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(52, 52, 52)
-                        .addComponent(jButton2)
+                        .addComponent(MakePurchaseButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(ExitButton)
                         .addGap(39, 39, 39))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -169,23 +169,28 @@ public class UserBasket extends javax.swing.JFrame {
                 .addComponent(jRadioButton2)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(ExitButton)
+                    .addComponent(MakePurchaseButton))
                 .addGap(33, 33, 33))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserMarket usermarket = new UserMarket();
+        usermarket.setLocationRelativeTo(null);
         usermarket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void MakePurchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MakePurchaseButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MakePurchaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,8 +228,8 @@ public class UserBasket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton MakePurchaseButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

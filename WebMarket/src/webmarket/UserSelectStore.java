@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
 /**
- *
  * @author Simos
  */
+
 public class UserSelectStore extends javax.swing.JFrame {
 
     /**
      * Creates new form UserSelectStore
      */
+
     public UserSelectStore() {
         initComponents();
     }
@@ -30,7 +25,7 @@ public class UserSelectStore extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         choice1 = new java.awt.Choice();
-        jButton1 = new javax.swing.JButton();
+        OkButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Αγορά προϊόντων");
@@ -40,10 +35,10 @@ public class UserSelectStore extends javax.swing.JFrame {
 
         choice1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
 
-        jButton1.setText("ΟΚ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        OkButton.setText("ΟΚ");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                OkButtonActionPerformed(evt);
             }
         });
 
@@ -59,7 +54,7 @@ public class UserSelectStore extends javax.swing.JFrame {
                 .addContainerGap(171, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(OkButton)
                         .addGap(66, 66, 66))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -73,18 +68,19 @@ public class UserSelectStore extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(OkButton)
                 .addGap(54, 54, 54))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
         UserSetMarket usersetmarket = new UserSetMarket();
+        usersetmarket.setLocationRelativeTo(null);
         usersetmarket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_OkButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -122,8 +118,8 @@ public class UserSelectStore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton OkButton;
     private java.awt.Choice choice1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

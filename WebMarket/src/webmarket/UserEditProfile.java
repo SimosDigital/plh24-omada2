@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
 
 /**
- *
  * @author Simos
  */
+
 public class UserEditProfile extends javax.swing.JFrame {
 
     /**
      * Creates new form UserEditProfile
      */
+
     public UserEditProfile() {
         initComponents();
     }
@@ -28,9 +23,9 @@ public class UserEditProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        ChangeButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -55,19 +50,24 @@ public class UserEditProfile extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση Προφίλ");
 
-        jButton1.setText("Τροποποίηση");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ChangeButton.setText("Τροποποίηση");
+        ChangeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ChangeButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Διαγραφή");
-
-        jButton3.setText("Πίσω");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        DeleteButton.setText("Διαγραφή");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                DeleteButtonActionPerformed(evt);
+            }
+        });
+
+        ExitButton.setText("Πίσω");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -160,11 +160,11 @@ public class UserEditProfile extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(jButton1)
+                .addComponent(ChangeButton)
                 .addGap(64, 64, 64)
-                .addComponent(jButton2)
+                .addComponent(DeleteButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(ExitButton)
                 .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +193,7 @@ public class UserEditProfile extends javax.swing.JFrame {
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ChangeButton, DeleteButton, ExitButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,26 +224,31 @@ public class UserEditProfile extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1))
+                    .addComponent(DeleteButton)
+                    .addComponent(ExitButton)
+                    .addComponent(ChangeButton))
                 .addGap(32, 32, 32))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton1, jButton2, jButton3});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ChangeButton, DeleteButton, ExitButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ChangeButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserProfile userprofile = new UserProfile();
+        userprofile.setLocationRelativeTo(null);
         userprofile.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,10 +286,10 @@ public class UserEditProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ChangeButton;
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JButton ExitButton;
     private java.awt.Choice choice1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

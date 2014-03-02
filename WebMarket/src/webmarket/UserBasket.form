@@ -33,9 +33,9 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="MakePurchaseButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ExitButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -121,8 +121,8 @@
               <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ExitButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="MakePurchaseButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
@@ -130,12 +130,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="ExitButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x3a0;&#x3af;&#x3c3;&#x3c9;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -236,10 +236,13 @@
         <Property name="text" type="java.lang.String" value="&#x3a0;&#x3b1;&#x3c1;&#x3b1;&#x3bb;&#x3b1;&#x3b2;&#x3ae; &#x3b1;&#x3c0;&#x3cc; &#x3c4;&#x3bf; &#x3ba;&#x3b1;&#x3c4;&#x3ac;&#x3c3;&#x3c4;&#x3b7;&#x3bc;&#x3b1;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="MakePurchaseButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x39f;&#x3bb;&#x3bf;&#x3ba;&#x3bb;&#x3ae;&#x3c1;&#x3c9;&#x3c3;&#x3b7; &#x3b1;&#x3b3;&#x3bf;&#x3c1;&#x3ac;&#x3c2;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MakePurchaseButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

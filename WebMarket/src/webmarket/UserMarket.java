@@ -1,10 +1,10 @@
 package webmarket;
 
-import model.Customer;
-
 /**
  * @author Simos
  */
+
+import model.Customer;
 
 public class UserMarket extends javax.swing.JFrame {
 
@@ -115,18 +115,21 @@ public class UserMarket extends javax.swing.JFrame {
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserFrame mainuser = new UserFrame();
         mainuser.setLogedUser(logedUser);
+        mainuser.setLocationRelativeTo(null);
         mainuser.setVisible(true);
         dispose();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
     private void UserBasketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserBasketButtonActionPerformed
         UserBasket userbasket = new UserBasket();
+        userbasket.setLocationRelativeTo(null);
         userbasket.setVisible(true);
         dispose();
     }//GEN-LAST:event_UserBasketButtonActionPerformed
 
     private void UserSelectStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserSelectStoreButtonActionPerformed
         UserSelectStore userselectstore = new UserSelectStore();
+        userselectstore.setLocationRelativeTo(null);
         userselectstore.setVisible(true);
         dispose();
     }//GEN-LAST:event_UserSelectStoreButtonActionPerformed

@@ -1,10 +1,10 @@
 package webmarket;
 
-import model.Customer;
-
 /**
  * @author Simos
  */
+
+import model.Customer;
 
 public class UserProfile extends javax.swing.JFrame {
 
@@ -126,24 +126,28 @@ public class UserProfile extends javax.swing.JFrame {
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserFrame mainuser = new UserFrame();
         mainuser.setLogedUser(logedUser);
+        mainuser.setLocationRelativeTo(null);
         mainuser.setVisible(true);
         dispose();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
     private void UserPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserPasswordButtonActionPerformed
         UserPassword userpassword = new UserPassword();
+        userpassword.setLocationRelativeTo(null);
         userpassword.setVisible(true);
         dispose();
     }//GEN-LAST:event_UserPasswordButtonActionPerformed
 
     private void UserEditProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserEditProfileButtonActionPerformed
         UserEditProfile usereditprofile = new UserEditProfile();
+        usereditprofile.setLocationRelativeTo(null);
         usereditprofile.setVisible(true);
         dispose();
     }//GEN-LAST:event_UserEditProfileButtonActionPerformed
 
     private void UserChecksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserChecksButtonActionPerformed
         UserChecks userchecks = new UserChecks();
+        userchecks.setLocationRelativeTo(null);
         userchecks.setVisible(true);
         dispose();
     }//GEN-LAST:event_UserChecksButtonActionPerformed

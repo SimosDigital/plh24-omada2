@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package webmarket;
+
+/**
+ * @author Simos
+ */
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Simos
- */
 public class UserQuantitySelect extends javax.swing.JFrame {
 
     /**
@@ -35,7 +29,7 @@ public class UserQuantitySelect extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Αγορά προϊόντων");
@@ -56,10 +50,10 @@ public class UserQuantitySelect extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Άκυρο");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setText("Άκυρο");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -71,7 +65,7 @@ public class UserQuantitySelect extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(132, 132, 132)
-                .addComponent(jButton1)
+                .addComponent(ExitButton)
                 .addGap(77, 77, 77))
             .addGroup(layout.createSequentialGroup()
                 .addGap(116, 116, 116)
@@ -99,7 +93,7 @@ public class UserQuantitySelect extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(ExitButton))
                 .addGap(56, 56, 56))
         );
 
@@ -109,15 +103,17 @@ public class UserQuantitySelect extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showMessageDialog(rootPane ,"Το προϊόν προστέθηκε με επιτυχία στο καλάθι σας" ,"     Αγορά προϊόντων",1);
         UserSetMarket usersetmarket = new UserSetMarket();
+        usersetmarket.setLocationRelativeTo(null);
         usersetmarket.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserSetMarket usersetmarket = new UserSetMarket();
+        usersetmarket.setLocationRelativeTo(null);
         usersetmarket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ExitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +151,7 @@ public class UserQuantitySelect extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ExitButton;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
