@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,6 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "CUSTOMER_ID")
     private Integer customerId;
@@ -72,7 +75,7 @@ public class Customer implements Serializable {
     @Column(name = "CREDIT_CARD_OWNER_NAME")
     private String creditCardOwnerName;
     @Column(name = "CREDIT_CARD_CVV")
-    private Integer creditCardCvv;
+    private String creditCardCvv;
     @Column(name = "CREDIT_CARD_BANK")
     private String creditCardBank;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customerId")
@@ -177,11 +180,11 @@ public class Customer implements Serializable {
         this.creditCardOwnerName = creditCardOwnerName;
     }
 
-    public Integer getCreditCardCvv() {
+    public String getCreditCardCvv() {
         return creditCardCvv;
     }
 
-    public void setCreditCardCvv(Integer creditCardCvv) {
+    public void setCreditCardCvv(String creditCardCvv) {
         this.creditCardCvv = creditCardCvv;
     }
 
