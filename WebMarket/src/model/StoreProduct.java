@@ -6,6 +6,8 @@
 
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "StoreProduct.findAll", query = "SELECT s FROM StoreProduct s"),
     @NamedQuery(name = "StoreProduct.findByProductStoreId", query = "SELECT s FROM StoreProduct s WHERE s.productStoreId = :productStoreId")})
 public class StoreProduct implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +61,9 @@ public class StoreProduct implements Serializable {
     }
 
     public void setProductStoreId(Integer productStoreId) {
+        Integer oldProductStoreId = this.productStoreId;
         this.productStoreId = productStoreId;
+        changeSupport.firePropertyChange("productStoreId", oldProductStoreId, productStoreId);
     }
 
     public Store getStoreId() {
@@ -64,7 +71,9 @@ public class StoreProduct implements Serializable {
     }
 
     public void setStoreId(Store storeId) {
+        Store oldStoreId = this.storeId;
         this.storeId = storeId;
+        changeSupport.firePropertyChange("storeId", oldStoreId, storeId);
     }
 
     public Product getProductId() {
@@ -72,7 +81,9 @@ public class StoreProduct implements Serializable {
     }
 
     public void setProductId(Product productId) {
+        Product oldProductId = this.productId;
         this.productId = productId;
+        changeSupport.firePropertyChange("productId", oldProductId, productId);
     }
 
     @Override
@@ -98,6 +109,14 @@ public class StoreProduct implements Serializable {
     @Override
     public String toString() {
         return "model.StoreProduct[ productStoreId=" + productStoreId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

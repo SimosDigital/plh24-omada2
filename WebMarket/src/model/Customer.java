@@ -6,6 +6,8 @@
 
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -44,6 +47,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Customer.findByCreditCardCvv", query = "SELECT c FROM Customer c WHERE c.creditCardCvv = :creditCardCvv"),
     @NamedQuery(name = "Customer.findByCreditCardBank", query = "SELECT c FROM Customer c WHERE c.creditCardBank = :creditCardBank")})
 public class Customer implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,7 +110,9 @@ public class Customer implements Serializable {
     }
 
     public void setCustomerId(Integer customerId) {
+        Integer oldCustomerId = this.customerId;
         this.customerId = customerId;
+        changeSupport.firePropertyChange("customerId", oldCustomerId, customerId);
     }
 
     public String getFirstName() {
@@ -113,7 +120,9 @@ public class Customer implements Serializable {
     }
 
     public void setFirstName(String firstName) {
+        String oldFirstName = this.firstName;
         this.firstName = firstName;
+        changeSupport.firePropertyChange("firstName", oldFirstName, firstName);
     }
 
     public String getLastName() {
@@ -121,7 +130,9 @@ public class Customer implements Serializable {
     }
 
     public void setLastName(String lastName) {
+        String oldLastName = this.lastName;
         this.lastName = lastName;
+        changeSupport.firePropertyChange("lastName", oldLastName, lastName);
     }
 
     public String getAddress() {
@@ -129,7 +140,9 @@ public class Customer implements Serializable {
     }
 
     public void setAddress(String address) {
+        String oldAddress = this.address;
         this.address = address;
+        changeSupport.firePropertyChange("address", oldAddress, address);
     }
 
     public String getPointsCardNumber() {
@@ -137,7 +150,9 @@ public class Customer implements Serializable {
     }
 
     public void setPointsCardNumber(String pointsCardNumber) {
+        String oldPointsCardNumber = this.pointsCardNumber;
         this.pointsCardNumber = pointsCardNumber;
+        changeSupport.firePropertyChange("pointsCardNumber", oldPointsCardNumber, pointsCardNumber);
     }
 
     public int getAvailablePoints() {
@@ -145,7 +160,9 @@ public class Customer implements Serializable {
     }
 
     public void setAvailablePoints(int availablePoints) {
+        int oldAvailablePoints = this.availablePoints;
         this.availablePoints = availablePoints;
+        changeSupport.firePropertyChange("availablePoints", oldAvailablePoints, availablePoints);
     }
 
     public String getPassword() {
@@ -153,7 +170,9 @@ public class Customer implements Serializable {
     }
 
     public void setPassword(String password) {
+        String oldPassword = this.password;
         this.password = password;
+        changeSupport.firePropertyChange("password", oldPassword, password);
     }
 
     public String getEmail() {
@@ -161,7 +180,9 @@ public class Customer implements Serializable {
     }
 
     public void setEmail(String email) {
+        String oldEmail = this.email;
         this.email = email;
+        changeSupport.firePropertyChange("email", oldEmail, email);
     }
 
     public String getCreditCardNumber() {
@@ -169,7 +190,9 @@ public class Customer implements Serializable {
     }
 
     public void setCreditCardNumber(String creditCardNumber) {
+        String oldCreditCardNumber = this.creditCardNumber;
         this.creditCardNumber = creditCardNumber;
+        changeSupport.firePropertyChange("creditCardNumber", oldCreditCardNumber, creditCardNumber);
     }
 
     public String getCreditCardOwnerName() {
@@ -177,7 +200,9 @@ public class Customer implements Serializable {
     }
 
     public void setCreditCardOwnerName(String creditCardOwnerName) {
+        String oldCreditCardOwnerName = this.creditCardOwnerName;
         this.creditCardOwnerName = creditCardOwnerName;
+        changeSupport.firePropertyChange("creditCardOwnerName", oldCreditCardOwnerName, creditCardOwnerName);
     }
 
     public String getCreditCardCvv() {
@@ -185,7 +210,9 @@ public class Customer implements Serializable {
     }
 
     public void setCreditCardCvv(String creditCardCvv) {
+        String oldCreditCardCvv = this.creditCardCvv;
         this.creditCardCvv = creditCardCvv;
+        changeSupport.firePropertyChange("creditCardCvv", oldCreditCardCvv, creditCardCvv);
     }
 
     public String getCreditCardBank() {
@@ -193,7 +220,9 @@ public class Customer implements Serializable {
     }
 
     public void setCreditCardBank(String creditCardBank) {
+        String oldCreditCardBank = this.creditCardBank;
         this.creditCardBank = creditCardBank;
+        changeSupport.firePropertyChange("creditCardBank", oldCreditCardBank, creditCardBank);
     }
 
     @XmlTransient
@@ -237,6 +266,14 @@ public class Customer implements Serializable {
     @Override
     public String toString() {
         return "model.Customer[ customerId=" + customerId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

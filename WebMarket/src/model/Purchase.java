@@ -6,6 +6,8 @@
 
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -42,6 +45,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Purchase.findByPointsEarned", query = "SELECT p FROM Purchase p WHERE p.pointsEarned = :pointsEarned"),
     @NamedQuery(name = "Purchase.findByDelivery", query = "SELECT p FROM Purchase p WHERE p.delivery = :delivery")})
 public class Purchase implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +64,7 @@ public class Purchase implements Serializable {
     private int pointsEarned;
     @Basic(optional = false)
     @Column(name = "DELIVERY")
-    private Serializable delivery;
+    private int delivery;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "purchaseId")
     private List<ProductPurchase> productPurchaseList;
     @OneToMany(mappedBy = "purchaseId")
@@ -78,7 +83,7 @@ public class Purchase implements Serializable {
         this.purchaseId = purchaseId;
     }
 
-    public Purchase(Integer purchaseId, float amount, int pointsEarned, Serializable delivery) {
+    public Purchase(Integer purchaseId, float amount, int pointsEarned, int delivery) {
         this.purchaseId = purchaseId;
         this.amount = amount;
         this.pointsEarned = pointsEarned;
@@ -90,7 +95,9 @@ public class Purchase implements Serializable {
     }
 
     public void setPurchaseId(Integer purchaseId) {
+        Integer oldPurchaseId = this.purchaseId;
         this.purchaseId = purchaseId;
+        changeSupport.firePropertyChange("purchaseId", oldPurchaseId, purchaseId);
     }
 
     public Date getDatetime() {
@@ -98,7 +105,9 @@ public class Purchase implements Serializable {
     }
 
     public void setDatetime(Date datetime) {
+        Date oldDatetime = this.datetime;
         this.datetime = datetime;
+        changeSupport.firePropertyChange("datetime", oldDatetime, datetime);
     }
 
     public float getAmount() {
@@ -106,7 +115,9 @@ public class Purchase implements Serializable {
     }
 
     public void setAmount(float amount) {
+        float oldAmount = this.amount;
         this.amount = amount;
+        changeSupport.firePropertyChange("amount", oldAmount, amount);
     }
 
     public int getPointsEarned() {
@@ -114,15 +125,19 @@ public class Purchase implements Serializable {
     }
 
     public void setPointsEarned(int pointsEarned) {
+        int oldPointsEarned = this.pointsEarned;
         this.pointsEarned = pointsEarned;
+        changeSupport.firePropertyChange("pointsEarned", oldPointsEarned, pointsEarned);
     }
 
-    public Serializable getDelivery() {
+    public int getDelivery() {
         return delivery;
     }
 
-    public void setDelivery(Serializable delivery) {
+    public void setDelivery(int delivery) {
+        int oldDelivery = this.delivery;
         this.delivery = delivery;
+        changeSupport.firePropertyChange("delivery", oldDelivery, delivery);
     }
 
     @XmlTransient
@@ -148,7 +163,9 @@ public class Purchase implements Serializable {
     }
 
     public void setStoreId(Store storeId) {
+        Store oldStoreId = this.storeId;
         this.storeId = storeId;
+        changeSupport.firePropertyChange("storeId", oldStoreId, storeId);
     }
 
     public Customer getCustomerId() {
@@ -156,7 +173,9 @@ public class Purchase implements Serializable {
     }
 
     public void setCustomerId(Customer customerId) {
+        Customer oldCustomerId = this.customerId;
         this.customerId = customerId;
+        changeSupport.firePropertyChange("customerId", oldCustomerId, customerId);
     }
 
     @Override
@@ -182,6 +201,14 @@ public class Purchase implements Serializable {
     @Override
     public String toString() {
         return "model.Purchase[ purchaseId=" + purchaseId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

@@ -6,6 +6,8 @@
 
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -37,6 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Product.findByPoints", query = "SELECT p FROM Product p WHERE p.points = :points"),
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")})
 public class Product implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,7 +85,9 @@ public class Product implements Serializable {
     }
 
     public void setProductId(Integer productId) {
+        Integer oldProductId = this.productId;
         this.productId = productId;
+        changeSupport.firePropertyChange("productId", oldProductId, productId);
     }
 
     public String getName() {
@@ -88,7 +95,9 @@ public class Product implements Serializable {
     }
 
     public void setName(String name) {
+        String oldName = this.name;
         this.name = name;
+        changeSupport.firePropertyChange("name", oldName, name);
     }
 
     public String getCode() {
@@ -96,7 +105,9 @@ public class Product implements Serializable {
     }
 
     public void setCode(String code) {
+        String oldCode = this.code;
         this.code = code;
+        changeSupport.firePropertyChange("code", oldCode, code);
     }
 
     public int getPoints() {
@@ -104,7 +115,9 @@ public class Product implements Serializable {
     }
 
     public void setPoints(int points) {
+        int oldPoints = this.points;
         this.points = points;
+        changeSupport.firePropertyChange("points", oldPoints, points);
     }
 
     public float getPrice() {
@@ -112,7 +125,9 @@ public class Product implements Serializable {
     }
 
     public void setPrice(float price) {
+        float oldPrice = this.price;
         this.price = price;
+        changeSupport.firePropertyChange("price", oldPrice, price);
     }
 
     @XmlTransient
@@ -156,6 +171,14 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "model.Product[ productId=" + productId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
