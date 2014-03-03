@@ -6,6 +6,8 @@
 
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -18,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,6 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProductPurchase.findByProductPurchaseId", query = "SELECT p FROM ProductPurchase p WHERE p.productPurchaseId = :productPurchaseId"),
     @NamedQuery(name = "ProductPurchase.findByQuantity", query = "SELECT p FROM ProductPurchase p WHERE p.quantity = :quantity")})
 public class ProductPurchase implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,7 +70,9 @@ public class ProductPurchase implements Serializable {
     }
 
     public void setProductPurchaseId(Integer productPurchaseId) {
+        Integer oldProductPurchaseId = this.productPurchaseId;
         this.productPurchaseId = productPurchaseId;
+        changeSupport.firePropertyChange("productPurchaseId", oldProductPurchaseId, productPurchaseId);
     }
 
     public int getQuantity() {
@@ -73,7 +80,9 @@ public class ProductPurchase implements Serializable {
     }
 
     public void setQuantity(int quantity) {
+        int oldQuantity = this.quantity;
         this.quantity = quantity;
+        changeSupport.firePropertyChange("quantity", oldQuantity, quantity);
     }
 
     public Purchase getPurchaseId() {
@@ -81,7 +90,9 @@ public class ProductPurchase implements Serializable {
     }
 
     public void setPurchaseId(Purchase purchaseId) {
+        Purchase oldPurchaseId = this.purchaseId;
         this.purchaseId = purchaseId;
+        changeSupport.firePropertyChange("purchaseId", oldPurchaseId, purchaseId);
     }
 
     public Product getProductId() {
@@ -89,7 +100,9 @@ public class ProductPurchase implements Serializable {
     }
 
     public void setProductId(Product productId) {
+        Product oldProductId = this.productId;
         this.productId = productId;
+        changeSupport.firePropertyChange("productId", oldProductId, productId);
     }
 
     @Override
@@ -115,6 +128,14 @@ public class ProductPurchase implements Serializable {
     @Override
     public String toString() {
         return "model.ProductPurchase[ productPurchaseId=" + productPurchaseId + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
