@@ -6,6 +6,7 @@ package webmarket;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import model.Customer;
@@ -17,11 +18,15 @@ public class UserPassword extends javax.swing.JFrame {
      */
     
     private static EntityManager em;
+    private javax.persistence.Query query1;
+    private Integer customerId;
 
     Customer logedUser;
     
     public UserPassword() {
-        initComponents();
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+         em = emf.createEntityManager();        
+         initComponents();
     }
 
     /**
@@ -181,30 +186,43 @@ public class UserPassword extends javax.swing.JFrame {
         int minLength =  8 ;
         int doAgain   =  0 ;
         
+        //στην περίπτωση που στην οθονη υπάρχει διπλό λάθος, ο έλεγχος και η ενημέρωση του χρήστη
+        //γίνεται κάθε φορά (ανά λάθος) με την χρήση ενός διακόπτη doAgain ο οποιος εαν αναψει το
+        //προγραμμα δεν κάνει και τους επόμενους ελέγχους αλλά δίνει το λάθος
+        
+        //έλεγχος εαν γνωρίζει τον παλαιο κωδικό
+        
         if (!logedUser.getPassword().equals(theOldPassword))
         { 
            JOptionPane.showMessageDialog(rootPane ,"O Παλαιός κωδικός που πληκτρολογήσατε είναι λάθος...     " ,"     Προσοχή !",2);  
            doAgain = 1;
         } else
         
+        //έλεγχος του κωδικού σε μήκος
+            
         if (theNewPassword.length() > maxLength) 
         { 
            JOptionPane.showMessageDialog(rootPane ,"Αποδεκτοί κωδικοί θεωρούνται, οι συνδυασμοί τουλάχιστον 8 έως 16 χαρακτήρων...     ", "     Προσοχή !",2); 
            doAgain = 1;
         } else 
          
+        //έλεγχος του κωδικού σε μήκος
+            
         if (theNewPassword.length() < minLength) 
         { 
            JOptionPane.showMessageDialog(rootPane ,"Αποδεκτοί κωδικοί θεωρούνται, οι συνδυασμοί τουλάχιστον 8 έως 16 χαρακτήρων...     ", "     Προσοχή !",2); 
            doAgain = 1;
         } else
-                                
+                    
+        //έλεγχος έαν το έγραψε σωστά
+            
         if (!theNewPassword.equals(theRetypeNewPassword))
         { 
            JOptionPane.showMessageDialog(rootPane ,"Δεν επαναλάβατε σωστά τον νέο σας κωδικό...     " ,"     Προσοχή !",2);  
            doAgain = 1;
         }    
         
+        // εάν ο διακόπτης ύπαρξης λάθους είναι μηδεν (δεν βρέθηκε πρόβλημα) τότε γινεται η ενημέρωση
         
         if (doAgain == 0) 
         {
@@ -212,9 +230,29 @@ public class UserPassword extends javax.swing.JFrame {
             em.getTransaction().begin();
             try
             {    
+            
+       //     query1 = em.createQuery("select u from Customer u where u.customerId=:customerId");
+       //     query1.setParameter("customerId", customerId);    
+                
             logedUser.setPassword(theNewPassword);
+            
+            
+                
+            
+            
+            
+            model.Customer c = new model.Customer();
+            c.setPassword(theNewPassword);
+       
+
+            
+            
+            
+            
+            
+            
             em.getTransaction().commit();
-            JOptionPane.showMessageDialog(rootPane ,"O κωδικός σας ενημερώθηκε...     " ,"     Προσοχή !",1);
+            JOptionPane.showMessageDialog(rootPane ,"O κωδικός σας άλλαξε...     " ,"     Προσοχή !",1);
             } catch (Exception e) 
               {
               e.printStackTrace();
@@ -222,6 +260,7 @@ public class UserPassword extends javax.swing.JFrame {
               }
             
             UserProfile userprofile = new UserProfile();
+            userprofile.setLogedUser(logedUser);
             userprofile.setLocationRelativeTo(null);
             userprofile.setVisible(true);
             dispose();    
