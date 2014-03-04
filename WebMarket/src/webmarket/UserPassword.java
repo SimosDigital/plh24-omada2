@@ -1,17 +1,25 @@
 package webmarket;
 
 /**
- * @author Simos
+ * @author Petter Sellers ( User_Password )
  */
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import model.Customer;
 
 public class UserPassword extends javax.swing.JFrame {
 
-    /**
+   /**
      * Creates new form UserPassword
      */
+    
+    private static EntityManager em;
 
+    Customer logedUser;
+    
     public UserPassword() {
         initComponents();
     }
@@ -25,116 +33,212 @@ public class UserPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        screenOldPassword = new javax.swing.JPasswordField();
         OkButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        logedUserText2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        screenNewPassword = new javax.swing.JPasswordField();
+        screenRetypeNewPassword = new javax.swing.JPasswordField();
+        logedUserText1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση Προφίλ");
 
-        jLabel1.setText("Αλλαγή κωδικού εισόδου");
-
-        jLabel2.setText("Παλιός κωδικός");
+        jLabel2.setText("Παλαιός κωδικός");
 
         jLabel3.setText("Νέος κωδικός");
 
-        jLabel4.setText("Νέος κωδικός");
+        jLabel4.setText("Επανάληψη κωδικού");
 
-        OkButton.setText("Αλλαγή");
+        OkButton.setText("Αποθήκευση");
         OkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OkButtonActionPerformed(evt);
             }
         });
 
-        ExitButton.setText("Άκυρο");
+        ExitButton.setText("Ακύρωση/Επιστροφή");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitButtonActionPerformed(evt);
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("3.1.2. Aλλαγή κωδικού εισόδου");
+
+        logedUserText2.setEnabled(false);
+        logedUserText2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logedUserText2ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Επώνυμο");
+
+        logedUserText1.setEnabled(false);
+
+        jLabel8.setText("Όνομα");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                        .addComponent(jPasswordField2))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(OkButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
-                                .addComponent(ExitButton)))))
-                .addGap(82, 82, 82))
+                        .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ExitButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logedUserText2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(screenOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(screenNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(logedUserText1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(screenRetypeNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(45, 45, 45)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(logedUserText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logedUserText2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(screenOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                    .addComponent(screenNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(screenRetypeNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OkButton)
                     .addComponent(ExitButton))
-                .addGap(35, 35, 35))
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε ακύρωση & επιστροφή...     ", "     Προσοχή !", JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if (holdExit != 0)
+            return;
+        
         UserProfile userprofile = new UserProfile();
+        userprofile.setLogedUser(logedUser);
         userprofile.setLocationRelativeTo(null);
         userprofile.setVisible(true);
         dispose();
     }//GEN-LAST:event_ExitButtonActionPerformed
 
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
-        JOptionPane.showMessageDialog(rootPane ,"Δώσατε λάθος τον παλιό σας κωδικό" ,"     Προσοχή !",2);
-        JOptionPane.showMessageDialog(rootPane ,"Ο νέος κωδικός πρέπει να γραφεί ίδιος 2 φορές","     Προσοχή !",2);
-        JOptionPane.showMessageDialog(rootPane ,"Ο νέος κωδικός πρέπει να είναι από 8 ως 16 χαρακτήρες","     Προσοχή !",2);
-        UserProfile userprofile = new UserProfile();
-        userprofile.setLocationRelativeTo(null);
-        userprofile.setVisible(true);
-        dispose();
+      
+        String theOldPassword       = new String(screenOldPassword.getPassword());
+        String theNewPassword       = new String(screenNewPassword.getPassword());
+        String theRetypeNewPassword = new String(screenRetypeNewPassword.getPassword());  
+                        
+        int maxLength = 16 ;
+        int minLength =  8 ;
+        int doAgain   =  0 ;
+        
+        if (!logedUser.getPassword().equals(theOldPassword))
+        { 
+           JOptionPane.showMessageDialog(rootPane ,"O Παλαιός κωδικός που πληκτρολογήσατε είναι λάθος...     " ,"     Προσοχή !",2);  
+           doAgain = 1;
+        } else
+        
+        if (theNewPassword.length() > maxLength) 
+        { 
+           JOptionPane.showMessageDialog(rootPane ,"Αποδεκτοί κωδικοί θεωρούνται, οι συνδυασμοί τουλάχιστον 8 έως 16 χαρακτήρων...     ", "     Προσοχή !",2); 
+           doAgain = 1;
+        } else 
+         
+        if (theNewPassword.length() < minLength) 
+        { 
+           JOptionPane.showMessageDialog(rootPane ,"Αποδεκτοί κωδικοί θεωρούνται, οι συνδυασμοί τουλάχιστον 8 έως 16 χαρακτήρων...     ", "     Προσοχή !",2); 
+           doAgain = 1;
+        } else
+                                
+        if (!theNewPassword.equals(theRetypeNewPassword))
+        { 
+           JOptionPane.showMessageDialog(rootPane ,"Δεν επαναλάβατε σωστά τον νέο σας κωδικό...     " ,"     Προσοχή !",2);  
+           doAgain = 1;
+        }    
+        
+        
+        if (doAgain == 0) 
+        {
+            
+            em.getTransaction().begin();
+            try
+            {    
+            logedUser.setPassword(theNewPassword);
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(rootPane ,"O κωδικός σας ενημερώθηκε...     " ,"     Προσοχή !",1);
+            } catch (Exception e) 
+              {
+              e.printStackTrace();
+              em.getTransaction().rollback();  
+              }
+            
+            UserProfile userprofile = new UserProfile();
+            userprofile.setLocationRelativeTo(null);
+            userprofile.setVisible(true);
+            dispose();    
+        } 
     }//GEN-LAST:event_OkButtonActionPerformed
 
+    private void logedUserText2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logedUserText2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logedUserText2ActionPerformed
+  
+    public void setLogedUser (Customer logedUser) {
+        this.logedUser = logedUser;
+                      
+        logedUserText1.setText(logedUser.getFirstName());
+        logedUserText2.setText(logedUser.getLastName());
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -173,12 +277,16 @@ public class UserPassword extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
     private javax.swing.JButton OkButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField logedUserText1;
+    private javax.swing.JTextField logedUserText2;
+    private javax.swing.JPasswordField screenNewPassword;
+    private javax.swing.JPasswordField screenOldPassword;
+    private javax.swing.JPasswordField screenRetypeNewPassword;
     // End of variables declaration//GEN-END:variables
 }
