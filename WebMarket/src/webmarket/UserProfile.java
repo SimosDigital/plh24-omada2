@@ -133,6 +133,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void UserPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserPasswordButtonActionPerformed
         UserPassword userpassword = new UserPassword();
+        userpassword.setLogedUser(logedUser);        
         userpassword.setLocationRelativeTo(null);
         userpassword.setVisible(true);
         dispose();
@@ -147,6 +148,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void UserChecksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserChecksButtonActionPerformed
         UserChecks userchecks = new UserChecks();
+        userchecks.setLogedUser(logedUser); 
         userchecks.setLocationRelativeTo(null);
         userchecks.setVisible(true);
         dispose();
