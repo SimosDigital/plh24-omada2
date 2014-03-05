@@ -226,7 +226,14 @@ public class UserPassword extends javax.swing.JFrame {
         
         if (doAgain == 0) 
         {
+            logedUser.setPassword(theNewPassword);
+            Customer temp = em.merge(logedUser);
+            em.persist(temp);
+            em.getTransaction().begin();
+            em.getTransaction().commit();
             
+            
+/*            
             em.getTransaction().begin();
             try
             {    
@@ -235,7 +242,6 @@ public class UserPassword extends javax.swing.JFrame {
             query1.setParameter("customerId", customerId);    
                 
             logedUser.setPassword(theNewPassword);
-            
             
          
             
@@ -256,7 +262,8 @@ public class UserPassword extends javax.swing.JFrame {
               {
               e.printStackTrace();
               em.getTransaction().rollback();  
-              }
+  
+            } */
             
             UserProfile userprofile = new UserProfile();
             userprofile.setLogedUser(logedUser);
