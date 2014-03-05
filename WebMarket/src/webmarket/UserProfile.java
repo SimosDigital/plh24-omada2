@@ -141,6 +141,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void UserEditProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserEditProfileButtonActionPerformed
         UserEditProfile usereditprofile = new UserEditProfile();
+        usereditprofile.setLogedUser(logedUser); 
         usereditprofile.setLocationRelativeTo(null);
         usereditprofile.setVisible(true);
         dispose();
