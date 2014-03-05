@@ -263,7 +263,38 @@ public class UserEditProfile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        // TODO add your handling code here:
+      
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε διαγραφή...     ", "     Προσοχή !", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if (holdExit != 0)
+        return;        
+        
+        em.getTransaction().begin();
+        try
+        {
+        
+        
+            model.Customer c = new model.Customer();
+            
+            em.remove(c);
+
+
+            
+                
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας διαγράφηκε...     " ,"     Προσοχή !",1);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }  
+        
+        UserProfile userprofile = new UserProfile();
+        userprofile.setLogedUser(logedUser);
+        userprofile.setLocationRelativeTo(null);
+        userprofile.setVisible(true);
+        dispose();              
+        
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void screenFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenFirstNameActionPerformed
