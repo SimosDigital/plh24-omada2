@@ -213,15 +213,15 @@ public class UserEditProfile extends javax.swing.JFrame {
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(82, 82, 82)
                 .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(ExitButton1)
-                .addGap(147, 147, 147))
+                .addGap(140, 140, 140))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,6 +352,19 @@ public class UserEditProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_screenPointsCardNumberActionPerformed
 
+    public void setLogedUser (Customer logedUser) {
+        this.logedUser = logedUser;
+                      
+        screenFirstName.setText(logedUser.getFirstName());                                                   
+        screenLastName.setText(logedUser.getLastName());                                                     
+        screenEmail.setText(logedUser.getEmail());                                                           
+        screenAddress.setText(logedUser.getAddress());                                                       
+        screenPointsCardNumber.setText(logedUser.getPointsCardNumber());                                     
+        screenCreditCardNumber.setText(logedUser.getCreditCardNumber());                                     
+        screenCreditCardOwnerName.setText(logedUser.getCreditCardOwnerName());                               
+        screenCreditCardCvv.setText(logedUser.getCreditCardCvv());  
+    }
+    
     /**
      * @param args the command line arguments
      */
