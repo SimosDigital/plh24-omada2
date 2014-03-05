@@ -6,8 +6,10 @@ package webmarket;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 import model.Customer;
 
 public class UserChecks extends javax.swing.JFrame {
@@ -21,7 +23,9 @@ public class UserChecks extends javax.swing.JFrame {
     Customer logedUser;
     
     public UserChecks() {
-        initComponents();
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+         em = emf.createEntityManager();        
+         initComponents();
     }
 
     /**
@@ -48,6 +52,14 @@ public class UserChecks extends javax.swing.JFrame {
         bonusCheckList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery2.getResultList();
         bonusCheckQuery3 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
         bonusCheckList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery3.getResultList();
+        bonusCheckQuery4 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
+        bonusCheckList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery4.getResultList();
+        bonusCheckQuery5 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
+        bonusCheckList5 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery5.getResultList();
+        bonusCheckQuery6 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
+        bonusCheckList6 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery6.getResultList();
+        bonusCheckQuery7 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
+        bonusCheckList7 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery7.getResultList();
         jLabel1 = new javax.swing.JLabel();
         logedUserText1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -81,36 +93,11 @@ public class UserChecks extends javax.swing.JFrame {
 
         logedUserText3.setEnabled(false);
 
-        jTable1.getTableHeader().setReorderingAllowed(false);
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bonusCheckList3, jTable1);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${checkId}"));
-        columnBinding.setColumnName("Κωδικός Επιταγής");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dateIn}"));
-        columnBinding.setColumnName("Ημερομηνία");
-        columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${purchaseId}"));
-        columnBinding.setColumnName("Κωδ.Παραγγελίας");
-        columnBinding.setColumnClass(model.Purchase.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${amount}"));
-        columnBinding.setColumnName("Ποσό");
-        columnBinding.setColumnClass(Float.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${}"));
-        columnBinding.setColumnName("Κατάσταση");
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${maxResults}");
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bonusCheckQuery2, eLProperty, jTable1);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(0).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(1).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(2).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(3).setMaxWidth(100);
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(4).setMaxWidth(100);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +150,11 @@ public class UserChecks extends javax.swing.JFrame {
     
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
 
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε επιστροφή...     ", "     Προσοχή !", JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if (holdExit != 0)
+            return;
+        
         UserChecks userchecks = new UserChecks();
         userchecks.setLogedUser(logedUser);
         userchecks.setLocationRelativeTo(null);
@@ -218,10 +210,18 @@ public class UserChecks extends javax.swing.JFrame {
     private java.util.List<model.BonusCheck> bonusCheckList1;
     private java.util.List<model.BonusCheck> bonusCheckList2;
     private java.util.List<model.BonusCheck> bonusCheckList3;
+    private java.util.List<model.BonusCheck> bonusCheckList4;
+    private java.util.List<model.BonusCheck> bonusCheckList5;
+    private java.util.List<model.BonusCheck> bonusCheckList6;
+    private java.util.List<model.BonusCheck> bonusCheckList7;
     private javax.persistence.Query bonusCheckQuery;
     private javax.persistence.Query bonusCheckQuery1;
     private javax.persistence.Query bonusCheckQuery2;
     private javax.persistence.Query bonusCheckQuery3;
+    private javax.persistence.Query bonusCheckQuery4;
+    private javax.persistence.Query bonusCheckQuery5;
+    private javax.persistence.Query bonusCheckQuery6;
+    private javax.persistence.Query bonusCheckQuery7;
     private java.util.List<model.Customer> customerList;
     private java.util.List<model.Customer> customerList1;
     private javax.persistence.Query customerQuery;
