@@ -198,7 +198,7 @@ public class UserPassword extends javax.swing.JFrame {
            doAgain = 1;
         } else
         
-        //έλεγχος του κωδικού σε μήκος
+        //έλεγχος του κωδικού σε μήκος max=16
             
         if (theNewPassword.length() > maxLength) 
         { 
@@ -206,7 +206,7 @@ public class UserPassword extends javax.swing.JFrame {
            doAgain = 1;
         } else 
          
-        //έλεγχος του κωδικού σε μήκος
+        //έλεγχος του κωδικού σε μήκος min=8
             
         if (theNewPassword.length() < minLength) 
         { 
@@ -226,44 +226,19 @@ public class UserPassword extends javax.swing.JFrame {
         
         if (doAgain == 0) 
         {
+            
+            
             logedUser.setPassword(theNewPassword);
+            
+            
             Customer temp = em.merge(logedUser);
             em.persist(temp);
             em.getTransaction().begin();
             em.getTransaction().commit();
             
-            
-/*            
-            em.getTransaction().begin();
-            try
-            {    
-            
-            query1 = em.createQuery("select u from Customer u where u.customerId=:customerId");
-            query1.setParameter("customerId", customerId);    
-                
-            logedUser.setPassword(theNewPassword);
-            
-         
-            
-            
-            model.Customer c = new model.Customer();
-            c.setPassword(theNewPassword);
-       
 
-            
-            
-            
-            
-            
-            
-            em.getTransaction().commit();
             JOptionPane.showMessageDialog(rootPane ,"O κωδικός σας άλλαξε...     " ,"     Προσοχή !",1);
-            } catch (Exception e) 
-              {
-              e.printStackTrace();
-              em.getTransaction().rollback();  
-  
-            } */
+       
             
             UserProfile userprofile = new UserProfile();
             userprofile.setLogedUser(logedUser);
