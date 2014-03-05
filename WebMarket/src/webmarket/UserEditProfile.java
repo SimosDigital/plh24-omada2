@@ -20,6 +20,7 @@ public class UserEditProfile extends javax.swing.JFrame {
     private static EntityManager em;
     private javax.persistence.Query query1;
     private Integer customerId;
+    private String creditbank;
 
     Customer logedUser;
     
@@ -55,7 +56,7 @@ public class UserEditProfile extends javax.swing.JFrame {
         screenCreditCardNumber = new javax.swing.JTextField();
         screenCreditCardOwnerName = new javax.swing.JTextField();
         screenCreditCardCvv = new javax.swing.JTextField();
-        choice1 = new java.awt.Choice();
+        screenCreditCardBank = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         screenPointsCardNumber = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -114,7 +115,13 @@ public class UserEditProfile extends javax.swing.JFrame {
             }
         });
 
-        choice1.setName(""); // NOI18N
+        screenCreditCardBank.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NBG", "EUROBANK", "ALPHA", "CITIBANK", "ΠΕΙΡΑΙΩΣ", "ΚΥΠΡΟΥ" }));
+        screenCreditCardBank.setToolTipText("");
+        screenCreditCardBank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenCreditCardBankActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,12 +135,15 @@ public class UserEditProfile extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(screenCreditCardCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(screenCreditCardNumber)
-                    .addComponent(screenCreditCardOwnerName)
-                    .addComponent(choice1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(screenCreditCardCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(screenCreditCardNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(screenCreditCardOwnerName))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(screenCreditCardBank, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,8 +162,8 @@ public class UserEditProfile extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(screenCreditCardBank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
@@ -212,16 +222,16 @@ public class UserEditProfile extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ExitButton1)
+                .addGap(140, 140, 140))
             .addGroup(layout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(ExitButton1)
-                .addGap(140, 140, 140))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +260,7 @@ public class UserEditProfile extends javax.swing.JFrame {
                     .addComponent(screenPointsCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DeleteButton)
                     .addComponent(OkButton))
@@ -269,32 +279,24 @@ public class UserEditProfile extends javax.swing.JFrame {
         if (holdExit != 0)
         return;        
         
-        em.getTransaction().begin();
-        try
-        {
+        
+        Customer temp = em.merge(logedUser);
         
         
-            model.Customer c = new model.Customer();
-            
-            em.remove(c);
-
-
-            
-                
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας διαγράφηκε...     " ,"     Προσοχή !",1);
-        } catch (Exception e)
-        {
+        try {
+            em.getTransaction().begin();
+            em.remove(temp);
+            em.getTransaction().commit(); 
+            } catch (Exception e) {
             e.printStackTrace();
             em.getTransaction().rollback();
-        }  
+            }
         
-        UserProfile userprofile = new UserProfile();
-        userprofile.setLogedUser(logedUser);
-        userprofile.setLocationRelativeTo(null);
-        userprofile.setVisible(true);
-        dispose();              
         
+        JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας διαγράφηκε, σας ευχαριστούμε για την εμπιστοσύνη σας...     " ,"     Προσοχή !",1);
+        
+        System.exit(0);
+               
     }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void screenFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenFirstNameActionPerformed
@@ -311,39 +313,28 @@ public class UserEditProfile extends javax.swing.JFrame {
         String theCreditCardNumber    = new String(screenCreditCardNumber.getText());   
         String theCreditCardOwnerName = new String(screenCreditCardOwnerName.getText());   
         String theCreditCardCvv       = new String(screenCreditCardCvv.getText());   
+      
+        creditbank = screenCreditCardBank.getSelectedItem().toString();
         
+        logedUser.setFirstName(theFirstName);
+        logedUser.setLastName(theLastName);               
+        logedUser.setEmail(theEmail);     
+        logedUser.setAddress(theAddress);  
+        logedUser.setPointsCardNumber(thePointsCardNumber); 
+        logedUser.setCreditCardNumber(theCreditCardNumber); 
+        logedUser.setCreditCardOwnerName(theCreditCardOwnerName); 
+        logedUser.setCreditCardCvv(theCreditCardCvv); 
+        logedUser.setCreditCardBank(creditbank); 
+        
+             
+        Customer temp = em.merge(logedUser);
+        em.persist(temp);
         em.getTransaction().begin();
-        try
-        {
-
-            
-            
-            query1 = em.createQuery("select u from Customer u where u.customerId=:customerId");
-            query1.setParameter("customerId", customerId);
-
-            logedUser.setFirstName(theFirstName);
-            logedUser.setLastName(theLastName);               
-
-            model.Customer c = new model.Customer();
-            
-            c.setLastName(theLastName);
-            c.setFirstName(theFirstName);
-            c.setEmail(theEmail);
-            c.setAddress(theAddress);
-            c.setPointsCardNumber(thePointsCardNumber);
-            c.setCreditCardNumber(theCreditCardNumber);
-            c.setCreditCardOwnerName(theCreditCardOwnerName);  
-            c.setCreditCardCvv(theCreditCardCvv); 
+        em.getTransaction().commit();        
                 
-                
-                
-            em.getTransaction().commit();
-            JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας ενημερώθηκε...     " ,"     Προσοχή !",1);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        }
+          
+        JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας ενημερώθηκε...     " ,"     Προσοχή !",1);
+
 
         UserProfile userprofile = new UserProfile();
         userprofile.setLogedUser(logedUser);
@@ -383,6 +374,10 @@ public class UserEditProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_screenPointsCardNumberActionPerformed
 
+    private void screenCreditCardBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenCreditCardBankActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenCreditCardBankActionPerformed
+
     public void setLogedUser (Customer logedUser) {
         this.logedUser = logedUser;
                       
@@ -394,6 +389,10 @@ public class UserEditProfile extends javax.swing.JFrame {
         screenCreditCardNumber.setText(logedUser.getCreditCardNumber());                                     
         screenCreditCardOwnerName.setText(logedUser.getCreditCardOwnerName());                               
         screenCreditCardCvv.setText(logedUser.getCreditCardCvv());  
+            
+        screenCreditCardBank.setSelectedItem(logedUser.getCreditCardBank()); 
+        
+        
     }
     
     /**
@@ -435,7 +434,6 @@ public class UserEditProfile extends javax.swing.JFrame {
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton ExitButton1;
     private javax.swing.JButton OkButton;
-    private java.awt.Choice choice1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -448,6 +446,7 @@ public class UserEditProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField screenAddress;
+    private javax.swing.JComboBox screenCreditCardBank;
     private javax.swing.JTextField screenCreditCardCvv;
     private javax.swing.JTextField screenCreditCardNumber;
     private javax.swing.JTextField screenCreditCardOwnerName;
