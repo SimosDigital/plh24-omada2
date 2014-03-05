@@ -1,8 +1,15 @@
 package webmarket;
 
 /**
- * @author Simos
+ * @author Petter Sellers ( USER_PROFILE )
  */
+
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import model.Customer;
 
 public class UserEditProfile extends javax.swing.JFrame {
 
@@ -10,10 +17,18 @@ public class UserEditProfile extends javax.swing.JFrame {
      * Creates new form UserEditProfile
      */
 
-    public UserEditProfile() {
-        initComponents();
-    }
+    private static EntityManager em;
+    private javax.persistence.Query query1;
+    private Integer customerId;
 
+    Customer logedUser;
+    
+    public UserEditProfile() {
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+         em = emf.createEntityManager();        
+         initComponents();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -23,39 +38,32 @@ public class UserEditProfile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ChangeButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
-        ExitButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        screenAddress = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        screenEmail = new javax.swing.JTextField();
+        screenLastName = new javax.swing.JTextField();
+        screenFirstName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        screenCreditCardNumber = new javax.swing.JTextField();
+        screenCreditCardOwnerName = new javax.swing.JTextField();
+        screenCreditCardCvv = new javax.swing.JTextField();
         choice1 = new java.awt.Choice();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        screenPointsCardNumber = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        OkButton = new javax.swing.JButton();
+        ExitButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση Προφίλ");
-
-        ChangeButton.setText("Τροποποίηση");
-        ChangeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChangeButtonActionPerformed(evt);
-            }
-        });
 
         DeleteButton.setText("Διαγραφή");
         DeleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,28 +72,29 @@ public class UserEditProfile extends javax.swing.JFrame {
             }
         });
 
-        ExitButton.setText("Πίσω");
-        ExitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Τα στοιχεία σας :");
-
-        jTextField4.setText("jTextField1");
-
         jLabel2.setText("Όνομα");
 
         jLabel4.setText("email");
 
         jLabel3.setText("Επώνυμο");
 
-        jTextField3.setText("jTextField1");
+        screenEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenEmailActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField1");
+        screenLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenLastNameActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
+        screenFirstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenFirstNameActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Διεύθυνση");
 
@@ -99,11 +108,11 @@ public class UserEditProfile extends javax.swing.JFrame {
 
         jLabel10.setText("Τράπεζα");
 
-        jTextField6.setText("jTextField6");
-
-        jTextField7.setText("jTextField7");
-
-        jTextField8.setText("jTextField8");
+        screenCreditCardNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenCreditCardNumberActionPerformed(evt);
+            }
+        });
 
         choice1.setName(""); // NOI18N
 
@@ -119,60 +128,70 @@ public class UserEditProfile extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addComponent(jTextField6)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(screenCreditCardCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(screenCreditCardNumber)
+                    .addComponent(screenCreditCardOwnerName)
+                    .addComponent(choice1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                    .addComponent(screenCreditCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(screenCreditCardOwnerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(screenCreditCardCvv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jLabel6.setText("Αρ. κάρτας πόντων ");
 
-        jTextField5.setText("jTextField5");
-        jTextField5.setEnabled(false);
+        screenPointsCardNumber.setEnabled(false);
+        screenPointsCardNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenPointsCardNumberActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("3.1.1. Eπεξεργασία Προφίλ");
+
+        OkButton.setText("Αποθήκευση");
+        OkButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OkButtonActionPerformed(evt);
+            }
+        });
+
+        ExitButton1.setText("Ακύρωση/Επιστροφή");
+        ExitButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(ChangeButton)
-                .addGap(64, 64, 64)
-                .addComponent(DeleteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ExitButton)
-                .addGap(69, 69, 69))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
+                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,74 +200,157 @@ public class UserEditProfile extends javax.swing.JFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel6))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField2)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(61, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(screenAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                                    .addComponent(screenEmail)
+                                    .addComponent(screenLastName)
+                                    .addComponent(screenFirstName)
+                                    .addComponent(screenPointsCardNumber)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addComponent(OkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ExitButton1)
+                .addGap(147, 147, 147))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ChangeButton, DeleteButton, ExitButton});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel11)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(screenFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(screenLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(screenEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(screenAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                    .addComponent(screenPointsCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DeleteButton)
-                    .addComponent(ExitButton)
-                    .addComponent(ChangeButton))
-                .addGap(32, 32, 32))
+                    .addComponent(OkButton))
+                .addGap(18, 18, 18)
+                .addComponent(ExitButton1)
+                .addGap(40, 40, 40))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ChangeButton, DeleteButton, ExitButton});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChangeButtonActionPerformed
-
-    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        UserProfile userprofile = new UserProfile();
-        userprofile.setLocationRelativeTo(null);
-        userprofile.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_ExitButtonActionPerformed
-
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DeleteButtonActionPerformed
+
+    private void screenFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenFirstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenFirstNameActionPerformed
+
+    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
+    
+        String theFirstName           = new String(screenFirstName.getText());   
+        String theLastName            = new String(screenLastName.getText());   
+        String theEmail               = new String(screenEmail.getText());   
+        String theAddress             = new String(screenAddress.getText());   
+        String thePointsCardNumber    = new String(screenPointsCardNumber.getText());   
+        String theCreditCardNumber    = new String(screenCreditCardNumber.getText());   
+        String theCreditCardOwnerName = new String(screenCreditCardOwnerName.getText());   
+        String theCreditCardCvv       = new String(screenCreditCardCvv.getText());   
+        
+        em.getTransaction().begin();
+        try
+        {
+
+            
+            
+            query1 = em.createQuery("select u from Customer u where u.customerId=:customerId");
+            query1.setParameter("customerId", customerId);
+
+            logedUser.setFirstName(theFirstName);
+            logedUser.setLastName(theLastName);               
+
+            model.Customer c = new model.Customer();
+            
+            c.setLastName(theLastName);
+            c.setFirstName(theFirstName);
+            c.setEmail(theEmail);
+            c.setAddress(theAddress);
+            c.setPointsCardNumber(thePointsCardNumber);
+            c.setCreditCardNumber(theCreditCardNumber);
+            c.setCreditCardOwnerName(theCreditCardOwnerName);  
+            c.setCreditCardCvv(theCreditCardCvv); 
+                
+                
+                
+            em.getTransaction().commit();
+            JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας ενημερώθηκε...     " ,"     Προσοχή !",1);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+
+        UserProfile userprofile = new UserProfile();
+        userprofile.setLogedUser(logedUser);
+        userprofile.setLocationRelativeTo(null);
+        userprofile.setVisible(true);
+        dispose();
+        
+    }//GEN-LAST:event_OkButtonActionPerformed
+
+    private void ExitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButton1ActionPerformed
+
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε ακύρωση & επιστροφή...     ", "     Προσοχή !", JOptionPane.YES_NO_CANCEL_OPTION);
+
+        if (holdExit != 0)
+        return;
+
+        UserProfile userprofile = new UserProfile();
+        userprofile.setLogedUser(logedUser);
+        userprofile.setLocationRelativeTo(null);
+        userprofile.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ExitButton1ActionPerformed
+
+    private void screenLastNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenLastNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenLastNameActionPerformed
+
+    private void screenEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenEmailActionPerformed
+
+    private void screenCreditCardNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenCreditCardNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenCreditCardNumberActionPerformed
+
+    private void screenPointsCardNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenPointsCardNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenPointsCardNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,12 +388,12 @@ public class UserEditProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ChangeButton;
     private javax.swing.JButton DeleteButton;
-    private javax.swing.JButton ExitButton;
+    private javax.swing.JButton ExitButton1;
+    private javax.swing.JButton OkButton;
     private java.awt.Choice choice1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -301,13 +403,13 @@ public class UserEditProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField screenAddress;
+    private javax.swing.JTextField screenCreditCardCvv;
+    private javax.swing.JTextField screenCreditCardNumber;
+    private javax.swing.JTextField screenCreditCardOwnerName;
+    private javax.swing.JTextField screenEmail;
+    private javax.swing.JTextField screenFirstName;
+    private javax.swing.JTextField screenLastName;
+    private javax.swing.JTextField screenPointsCardNumber;
     // End of variables declaration//GEN-END:variables
 }
