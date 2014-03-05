@@ -231,14 +231,13 @@ public class UserPassword extends javax.swing.JFrame {
             try
             {    
             
-       //     query1 = em.createQuery("select u from Customer u where u.customerId=:customerId");
-       //     query1.setParameter("customerId", customerId);    
+            query1 = em.createQuery("select u from Customer u where u.customerId=:customerId");
+            query1.setParameter("customerId", customerId);    
                 
             logedUser.setPassword(theNewPassword);
             
             
-                
-            
+         
             
             
             model.Customer c = new model.Customer();
