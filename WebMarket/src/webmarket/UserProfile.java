@@ -133,7 +133,7 @@ public class UserProfile extends javax.swing.JFrame {
 
     private void UserPasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserPasswordButtonActionPerformed
         UserPassword userpassword = new UserPassword();
-        userpassword.setLogedUser(logedUser);        
+        userpassword.setLogedUser(logedUser);
         userpassword.setLocationRelativeTo(null);
         userpassword.setVisible(true);
         dispose();
