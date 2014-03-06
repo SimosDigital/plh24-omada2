@@ -308,8 +308,7 @@ public class AdminNewUser extends javax.swing.JFrame {
                     query1.setParameter("pointsCardNumber", cardNumber);
                     results = query1.getResultList();
                 } while (results.size() == 1);
-             
-                newcustomer.setCustomerId(1);
+
                 newcustomer.setFirstName(firstname);
                 newcustomer.setLastName(lastname);
                 newcustomer.setEmail(email);

@@ -14,8 +14,8 @@ import javax.persistence.Persistence;
 public class LoginFrame extends javax.swing.JFrame {
     
     // Εδώ ορίζουμε όνομα και pwd για τον διαχειριστή
-    private final String adminUser = "0";
-    private final String adminPwd = "0";
+    private final String adminUser = "admin";
+    private final String adminPwd = "admin";
     // Εδώ ορίζουμε μεταβλητές για τον EntityManager
     private static EntityManager em;
     private javax.persistence.Query query1;
