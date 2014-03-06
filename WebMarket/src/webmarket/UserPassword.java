@@ -77,7 +77,7 @@ public class UserPassword extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("3.1.2. Aλλαγή κωδικού εισόδου");
+        jLabel5.setText("3.1.2. Aλλαγή κωδικού");
 
         logedUserText2.setEnabled(false);
         logedUserText2.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +164,7 @@ public class UserPassword extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         
-        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε ακύρωση & επιστροφή...     ", "     Προσοχή !", JOptionPane.YES_NO_CANCEL_OPTION);
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε ακύρωση & επιστροφή...     ", "     WebMarket", JOptionPane.YES_NO_CANCEL_OPTION);
         
         if (holdExit != 0)
             return;
@@ -189,6 +189,14 @@ public class UserPassword extends javax.swing.JFrame {
         //στην περίπτωση που στην οθονη υπάρχει διπλό λάθος, ο έλεγχος και η ενημέρωση του χρήστη
         //γίνεται κάθε φορά (ανά λάθος) με την χρήση ενός διακόπτη doAgain ο οποιος εαν αναψει το
         //προγραμμα δεν κάνει και τους επόμενους ελέγχους αλλά δίνει το λάθος
+        
+        // ελεγχος να μην αφηνει το κενο
+        
+        if (theOldPassword.equals ("") ) 
+        { 
+           JOptionPane.showMessageDialog(rootPane ,"Θα πρέπει να πληκτρολογήσετε τον παλαιό σας κωδικό...     ", "     Προσοχή !",2); 
+           doAgain = 1;
+        } else 
         
         //έλεγχος εαν γνωρίζει τον παλαιο κωδικό
         
@@ -237,7 +245,7 @@ public class UserPassword extends javax.swing.JFrame {
             em.getTransaction().commit();
             
 
-            JOptionPane.showMessageDialog(rootPane ,"O κωδικός σας άλλαξε...     " ,"     Προσοχή !",1);
+            JOptionPane.showMessageDialog(rootPane ,"O κωδικός σας άλλαξε...     " ,"     WebMarket",1);
        
             
             UserProfile userprofile = new UserProfile();
