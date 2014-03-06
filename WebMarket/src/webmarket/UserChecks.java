@@ -82,7 +82,7 @@ public class UserChecks extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("3.1.3. Οι δωροεπιταγές σας");
+        jLabel1.setText("3.1.3. Προβολή δωροεπιταγών");
 
         logedUserText1.setEnabled(false);
 
@@ -156,7 +156,7 @@ public class UserChecks extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(ExitButton)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -166,15 +166,15 @@ public class UserChecks extends javax.swing.JFrame {
     
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
 
-        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε επιστροφή...     ", "     Προσοχή !", JOptionPane.YES_NO_OPTION);
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε επιστροφή...     ", "     WebMarket", JOptionPane.YES_NO_OPTION);
 
         if (holdExit != 0)
         return;   
 
-        UserChecks userchecks = new UserChecks();
-        userchecks.setLogedUser(logedUser);     
-        userchecks.setLocationRelativeTo(null);
-        userchecks.setVisible(true);  
+        UserProfile userprofile = new UserProfile();
+        userprofile.setLogedUser(logedUser);
+        userprofile.setLocationRelativeTo(null);
+        userprofile.setVisible(true);
         dispose();
         
     }//GEN-LAST:event_ExitButtonActionPerformed
