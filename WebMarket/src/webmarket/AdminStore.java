@@ -150,7 +150,6 @@ public class AdminStore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        
         AdminFrame mainadmin = new AdminFrame();
         mainadmin.setLocationRelativeTo(null);
         mainadmin.setVisible(true);
@@ -207,8 +206,10 @@ public class AdminStore extends javax.swing.JFrame {
                 storeList.remove(selected);
             }
         }
-        editStoreButton.setEnabled(false);
-        delStoreButton.setEnabled(false);
+        AdminStore adminstore = new AdminStore();
+        adminstore.setLocationRelativeTo(null);
+        adminstore.setVisible(true);
+        dispose();
     }//GEN-LAST:event_delStoreButtonActionPerformed
 
     private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
