@@ -4,13 +4,25 @@ package webmarket;
  * @author Simos
  */
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import model.Product;
+import model.StoreProduct;
+
 public class AdminProduct extends javax.swing.JFrame {
 
+    private static EntityManager em;
+    
     /**
      * Creates new form AdminProduct
      */
     
     public AdminProduct() {
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+        // Δημιουργία του Entity Manager
+        em = emf.createEntityManager();
         initComponents();
     }
 
@@ -22,14 +34,18 @@ public class AdminProduct extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        WebMarketPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("WebMarketPU").createEntityManager();
+        productQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT p FROM Product p");
+        productList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : productQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        ExitButton = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        newProductButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
+        delProductButton = new javax.swing.JButton();
+        editProductButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση προϊόντων (administrator)");
@@ -37,31 +53,57 @@ public class AdminProduct extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Λίστα προϊόντων");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Κωδικός", "Περιγραφή", "Πόντοι", "Τιμή"
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, productList, jTable1);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+        columnBinding.setColumnName("Περιγραφή");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${code}"));
+        columnBinding.setColumnName("Κωδικός");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${price}"));
+        columnBinding.setColumnName("Τιμή");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${points}"));
+        columnBinding.setColumnName("Πόντοι");
+        columnBinding.setColumnClass(Integer.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
-        ));
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Νέο");
-
-        ExitButton.setText("Πίσω");
-        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+        newProductButton.setText("Νέο");
+        newProductButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitButtonActionPerformed(evt);
+                newProductButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Διαγραφή");
+        exitButton.setText("Πίσω");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Τροποποίηση");
+        delProductButton.setText("Διαγραφή");
+        delProductButton.setEnabled(false);
+        delProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delProductButtonActionPerformed(evt);
+            }
+        });
+
+        editProductButton.setText("Τροποποίηση");
+        editProductButton.setEnabled(false);
+        editProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editProductButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,18 +120,18 @@ public class AdminProduct extends javax.swing.JFrame {
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(newProductButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107)
-                        .addComponent(jButton2)
+                        .addComponent(editProductButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(delProductButton)
                         .addGap(105, 105, 105)
-                        .addComponent(ExitButton)
+                        .addComponent(exitButton)
                         .addGap(33, 33, 33)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ExitButton, jButton1, jButton2, jButton3});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {delProductButton, editProductButton, exitButton, newProductButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,22 +142,107 @@ public class AdminProduct extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(ExitButton))
+                    .addComponent(newProductButton)
+                    .addComponent(editProductButton)
+                    .addComponent(delProductButton)
+                    .addComponent(exitButton))
                 .addGap(35, 35, 35))
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         AdminFrame mainadmin = new AdminFrame();
         mainadmin.setLocationRelativeTo(null);
         mainadmin.setVisible(true);
         dispose();
-    }//GEN-LAST:event_ExitButtonActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
+        // Δημιουργία προϊόντος
+        Product selectedProduct = new Product();
+        // Καλούμε το AdminEditProduct σε mode 1 (δημιουργία)
+        AdminEditProduct editProduct = new AdminEditProduct(selectedProduct,1);
+        editProduct.setLocationRelativeTo(null);
+        editProduct.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_newProductButtonActionPerformed
+
+    private void editProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProductButtonActionPerformed
+        // Τροποποίηση προϊόντος
+        int selected = jTable1.getSelectedRow();
+        // Καλούμε το AdminEditProduct σε mode 2 (τροποποίηση)
+        AdminEditProduct editProduct = new AdminEditProduct(productList.get(selected),2);
+        editProduct.setLocationRelativeTo(null);
+        editProduct.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_editProductButtonActionPerformed
+
+    private void delProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delProductButtonActionPerformed
+        // Διαγραφή προιόντος.
+        int selected = jTable1.getSelectedRow();
+        int n;
+        Product delProduct = productList.get(selected);
+        // Ελέγχουμε αν υπάρχουν παραγγελίες για αυτό το προϊόν.
+        if (delProduct.getProductPurchaseList().size() > 0) {
+            n = JOptionPane.showOptionDialog(rootPane,
+                "Το προϊόν δε μπορεί να διαγραφεί γιατί\n" +
+                "υπάρχουν παραγγελίες σχετικές με αυτό.\n" +
+                "Θέλετε να γίνει μη ενεργό (supply end) ;"
+                , "    Προσοχή !!!", 2, 2, null, null, rootPane);
+        }
+        else {
+            n = JOptionPane.showOptionDialog(rootPane,
+                "Το προϊόν θα διαγραφεί από \n" +
+                "   όλα τα καταστήματα!\n" +
+                "     Είστε σίγουροι;"
+                , "    Προσοχή !!!", 2, 2, null, null, rootPane);
+        }
+        // Εαν επιλέξουμε τη διαγραφή του καταστήματος
+        if (n == 0) {
+            em.getTransaction().begin();
+            // Αν υπάρχουν παραγγελίες δε το σβήνουμε.
+            if (delProduct.getProductPurchaseList().size() >0) {
+                delProduct.setCode("supply end");
+                delProduct.setPrice(0);
+                delProduct.setPoints(0);
+                Product temp = em.merge(delProduct);
+                em.persist(temp);
+                em.getTransaction().commit();
+                // Πρέπει όμως να σβήσουμε τα συσχετισμένα καταστήματα.
+                if (delProduct.getStoreProductList().size() >0) {
+                    StoreProduct tempsp;
+                    em.getTransaction().begin();
+                    for (StoreProduct sp : delProduct.getStoreProductList()) {
+                        tempsp = em.merge(sp);
+                        em.remove(tempsp);
+                    }
+                    em.getTransaction().commit();
+                }
+            }
+            // Προϊόντα χωρίς παραγγελίες απλά τα σβήνουμε.
+            else {
+                Product temp = em.merge(delProduct);
+                em.remove(temp);
+                em.getTransaction().commit();
+                productList.remove(selected);
+            }
+        }
+        AdminProduct adminProduct = new AdminProduct();
+        adminProduct.setLocationRelativeTo(null);
+        adminProduct.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_delProductButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (jTable1.getSelectedRow() >= 0) {
+            editProductButton.setEnabled(true);
+            delProductButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -153,12 +280,16 @@ public class AdminProduct extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ExitButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.persistence.EntityManager WebMarketPUEntityManager;
+    private javax.swing.JButton delProductButton;
+    private javax.swing.JButton editProductButton;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton newProductButton;
+    private java.util.List<model.Product> productList;
+    private javax.persistence.Query productQuery;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
