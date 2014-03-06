@@ -293,7 +293,7 @@ public class UserEditProfile extends javax.swing.JFrame {
             }
         
         
-        JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας διαγράφηκε, σας ευχαριστούμε για την εμπιστοσύνη σας...     " ,"     Προσοχή !",1);
+        JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας διαγράφηκε, σας ευχαριστούμε για την εμπιστοσύνη σας...     " ,"     WebMarket",1);
         
         System.exit(0);
                
@@ -333,7 +333,7 @@ public class UserEditProfile extends javax.swing.JFrame {
         em.getTransaction().commit();        
                 
           
-        JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας ενημερώθηκε...     " ,"     Προσοχή !",1);
+        JOptionPane.showMessageDialog(rootPane ,"Το Προφίλ σας ενημερώθηκε...     " ,"     WebMarket",1);
 
 
         UserProfile userprofile = new UserProfile();
@@ -346,7 +346,7 @@ public class UserEditProfile extends javax.swing.JFrame {
 
     private void ExitButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButton1ActionPerformed
 
-        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε ακύρωση & επιστροφή...     ", "     Προσοχή !", JOptionPane.YES_NO_CANCEL_OPTION);
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε ακύρωση & επιστροφή...     ", "     WebMarket", JOptionPane.YES_NO_CANCEL_OPTION);
 
         if (holdExit != 0)
         return;
