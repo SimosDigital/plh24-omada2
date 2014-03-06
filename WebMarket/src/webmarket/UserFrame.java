@@ -5,6 +5,11 @@ package webmarket;
  */
 
 import model.Customer;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 public class UserFrame extends javax.swing.JFrame {
 
@@ -31,7 +36,9 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         userMarketButton = new javax.swing.JButton();
         userProfileButton = new javax.swing.JButton();
-        logedUserText = new javax.swing.JTextField();
+        ExitButton = new javax.swing.JButton();
+        logedUserText1 = new javax.swing.JTextField();
+        logedUserText2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Κεντρικό μενού");
@@ -40,7 +47,8 @@ public class UserFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 204));
-        jLabel2.setText("          Επιλέξτε κατηγορία");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Επιλέξτε κατηγορία εργασιών");
 
         userMarketButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         userMarketButton.setText("Αγορά προϊόντων");
@@ -52,16 +60,35 @@ public class UserFrame extends javax.swing.JFrame {
 
         userProfileButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         userProfileButton.setText("Διαχείριση Προφίλ");
+        userProfileButton.setMaximumSize(new java.awt.Dimension(195, 31));
+        userProfileButton.setMinimumSize(new java.awt.Dimension(195, 31));
+        userProfileButton.setPreferredSize(new java.awt.Dimension(195, 31));
         userProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userProfileButtonActionPerformed(evt);
             }
         });
 
-        logedUserText.setEnabled(false);
-        logedUserText.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        ExitButton.setForeground(new java.awt.Color(0, 51, 204));
+        ExitButton.setText("Έξοδος");
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logedUserTextActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
+            }
+        });
+
+        logedUserText1.setEnabled(false);
+        logedUserText1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logedUserText1ActionPerformed(evt);
+            }
+        });
+
+        logedUserText2.setEnabled(false);
+        logedUserText2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logedUserText2ActionPerformed(evt);
             }
         });
 
@@ -69,19 +96,29 @@ public class UserFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(logedUserText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(userMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(userProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(userMarketButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(userProfileButton, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(165, 165, 165)
+                                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 60, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(logedUserText1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(logedUserText2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,14 +126,17 @@ public class UserFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(logedUserText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83)
+                    .addComponent(logedUserText2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logedUserText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(45, 45, 45)
                 .addComponent(userProfileButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(45, 45, 45)
                 .addComponent(userMarketButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,13 +158,32 @@ public class UserFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_userProfileButtonActionPerformed
 
-    private void logedUserTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logedUserTextActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+      
+        int holdExit = JOptionPane.showConfirmDialog(this, "Σίγουρα ζητήσατε την έξοδο σας από το WebMarket...     ", "     WebMarket", JOptionPane.YES_NO_OPTION);
+
+        if (holdExit != 0)
+        return;
+               
+        
+        JOptionPane.showMessageDialog(rootPane ,"Σας ευχαριστούμε για την εμπιστοσύνη σας...     " ,"     WebMarket",1);
+        
+        System.exit(0);
+                
+    }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void logedUserText1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logedUserText1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_logedUserTextActionPerformed
+    }//GEN-LAST:event_logedUserText1ActionPerformed
+
+    private void logedUserText2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logedUserText2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logedUserText2ActionPerformed
 
     public void setLogedUser (Customer logedUser){
         this.logedUser = logedUser;
-        logedUserText.setText(logedUser.getFirstName());
+        logedUserText1.setText(logedUser.getFirstName());
+        logedUserText2.setText(logedUser.getLastName()); 
     }
     
     /**
@@ -163,9 +222,11 @@ public class UserFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField logedUserText;
+    private javax.swing.JTextField logedUserText1;
+    private javax.swing.JTextField logedUserText2;
     private javax.swing.JButton userMarketButton;
     private javax.swing.JButton userProfileButton;
     // End of variables declaration//GEN-END:variables
