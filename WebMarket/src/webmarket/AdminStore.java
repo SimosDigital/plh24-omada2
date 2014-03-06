@@ -10,17 +10,10 @@ import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import model.Store;
 import model.StoreProduct;
-import model.Purchase;
 
 public class AdminStore extends javax.swing.JFrame {
 
-    private EntityManager em;
-    private int selected;
-    private Store tempStore;
-    private Store deleteStore = new Store();
-    
-    
-    
+    private static EntityManager em;
     
     /**
      * Creates new form AdminStore
@@ -29,10 +22,10 @@ public class AdminStore extends javax.swing.JFrame {
     public AdminStore() {
          EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
         // Δημιουργία του Entity Manager
-        em = emf.createEntityManager();          
+        em = emf.createEntityManager();
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,29 +37,33 @@ public class AdminStore extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         WebMarketPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("WebMarketPU").createEntityManager();
-        storeQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager0.createQuery("SELECT s FROM Store s \nWHERE s.storeId > 1");
+        storeQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager0.createQuery("SELECT s FROM Store s ");
         storeList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(storeQuery.getResultList());
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jBtnEdit = new javax.swing.JButton();
-        jBtnDelete = new javax.swing.JButton();
-        ExitButton = new javax.swing.JButton();
-        textField1 = new javax.swing.JTextField();
+        newStoreButton = new javax.swing.JButton();
+        editStoreButton = new javax.swing.JButton();
+        delStoreButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση καταστημάτων (administrator)");
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, storeList, jTable1);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
-        columnBinding.setColumnName("Name");
+        columnBinding.setColumnName("Όνομα");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${address}"));
-        columnBinding.setColumnName("Address");
+        columnBinding.setColumnName("Διεύθυνση");
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setPreferredWidth(45);
@@ -75,26 +72,33 @@ public class AdminStore extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Λίστα καταστημάτων");
 
-        jButton1.setText("Νέο");
-
-        jBtnEdit.setText("Τροποποίηση");
-        jBtnEdit.addActionListener(new java.awt.event.ActionListener() {
+        newStoreButton.setText("Νέο");
+        newStoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnEditActionPerformed(evt);
+                newStoreButtonActionPerformed(evt);
             }
         });
 
-        jBtnDelete.setText("Διαγραφή");
-        jBtnDelete.addActionListener(new java.awt.event.ActionListener() {
+        editStoreButton.setText("Τροποποίηση");
+        editStoreButton.setEnabled(false);
+        editStoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnDeleteActionPerformed(evt);
+                editStoreButtonActionPerformed(evt);
             }
         });
 
-        ExitButton.setText("Πίσω");
-        ExitButton.addActionListener(new java.awt.event.ActionListener() {
+        delStoreButton.setText("Διαγραφή");
+        delStoreButton.setEnabled(false);
+        delStoreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ExitButtonActionPerformed(evt);
+                delStoreButtonActionPerformed(evt);
+            }
+        });
+
+        exitButton.setText("Πίσω");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -112,18 +116,17 @@ public class AdminStore extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(newStoreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(67, 67, 67)
-                                .addComponent(jBtnEdit)
+                                .addComponent(editStoreButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jBtnDelete)
+                                .addComponent(delStoreButton)
                                 .addGap(67, 67, 67)
-                                .addComponent(ExitButton))
-                            .addComponent(textField1))))
+                                .addComponent(exitButton)))))
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ExitButton, jBtnDelete, jBtnEdit, jButton1});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {delStoreButton, editStoreButton, exitButton, newStoreButton});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,15 +134,13 @@ public class AdminStore extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jBtnEdit)
-                    .addComponent(jBtnDelete)
-                    .addComponent(ExitButton))
+                    .addComponent(newStoreButton)
+                    .addComponent(editStoreButton)
+                    .addComponent(delStoreButton)
+                    .addComponent(exitButton))
                 .addGap(47, 47, 47))
         );
 
@@ -148,104 +149,95 @@ public class AdminStore extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        
         AdminFrame mainadmin = new AdminFrame();
         mainadmin.setLocationRelativeTo(null);
         mainadmin.setVisible(true);
         dispose();
-    }//GEN-LAST:event_ExitButtonActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void jBtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteActionPerformed
-        selected = jTable1.getSelectedRow();
-        tempStore = storeList.get(selected);
-
-
-        if (selected >= 0) {
-            
-      // ΠΡΟΣΟΡΙΝΆ ΜΟΝΟ ΓΙΑ ΤΕΣΤ !!!!!!!!!!!!!     
-      textField1.setText("Γραμμή : " + selected + "   Εγγραφή πίνακα"
-      + " καταστημάτων : " + tempStore.getStoreId());
-/*
-            
-            if (tempStore.getPurchaseList().size() >0 || tempStore.getStoreProductList().size() >0) {
-                int n = JOptionPane.showOptionDialog(rootPane,
-                        "Υπάρχουν συνδέσεις με προϊόντα ή παραγγελίες\n"
-                      + "με αυτό το κατάστημα. Θα χαθούν κι αυτές με \n"
-                      + "τη διαγραφή του.   Είστε σίγουροι;"
-                      , "    Προσοχή !!!", 2, 2, null, null, rootPane);
-                if (n == 0) {
-
-                    if (tempStore.getStoreProductList().size() >0) {
-                        for (StoreProduct sp : tempStore.getStoreProductList()) {
-                            StoreProduct temp = em.merge(sp);
-                            em.remove(temp);
-                        }
-                    }
-                    if (tempStore.getPurchaseList().size() >0) {
-                        for (Purchase pu : tempStore.getPurchaseList()) {
-                            pu.setStoreId(deleteStore); 
-                            em.persist(pu);
-                        }
-                    }
-                storeList.remove(selected);
-                Store temp = em.merge(tempStore);
-                em.remove(temp);
-                em.getTransaction().begin();
+    private void delStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delStoreButtonActionPerformed
+        // Διαγραφή καταστήματος.
+        int selected = jTable1.getSelectedRow();
+        int n;
+        Store delStore = storeList.get(selected);
+        // Ελέγχουμε αν υπάρχουν παραγγελίες για αυτό το κατάστημα.
+        if (delStore.getPurchaseList().size() > 0) {
+            n = JOptionPane.showOptionDialog(rootPane,
+                "Το κατάστημα δε μπορεί να διαγραφεί γιατί\n" +
+                "υπάρχουν παραγγελίες σχετικές με αυτό.\n" +
+                "Θέλετε να διαγραφούν τα προϊόντα από το\n" +
+                "κατάστημα και να αλλάξει η διεύθυνσή του\n" +
+                "σε:   «Το κατάστημα έχει κλείσει !» ;"
+                , "    Προσοχή !!!", 2, 2, null, null, rootPane);
+        }
+        else {
+            n = JOptionPane.showOptionDialog(rootPane,
+                "Το κατάστημα και τα προϊόντα που\n" +
+                "υπάρχουν σε αυτό θα διαγραφούν !\n" +
+                "       Είστε σίγουροι;"
+                , "    Προσοχή !!!", 2, 2, null, null, rootPane);
+        }
+        // Εαν επιλέξουμε τη διαγραφή του καταστήματος
+        if (n == 0) {
+            em.getTransaction().begin();
+            // Αν υπάρχουν παραγγελίες δε το σβήνουμε.
+            if (delStore.getPurchaseList().size() >0) {
+                delStore.setAddress("Το κατάστημα έχει κλείσει !");
+                Store temp = em.merge(delStore);
+                em.persist(temp);
                 em.getTransaction().commit();
-    
-                }
-            }
-            else {
-                int m = JOptionPane.showOptionDialog(rootPane,
-                        "Το κατάστημα θα διαγραφεί μόνιμα \n"
-                      + "από τη βάση δεδομένων \n"
-                      + "   Είστε σίγουροι;"
-                      , "    Προσοχή !!!", 2, 2, null, null, rootPane);
-                if (m == 0) {
-                    storeList.remove(selected);
-                    Store temp = em.merge(tempStore);
-                    em.remove(temp);
+                // Πρέπει όμως να σβήσουμε τα συσχετισμένα προϊόντα.
+                if (delStore.getStoreProductList().size() >0) {
+                    StoreProduct tempsp;
                     em.getTransaction().begin();
+                    for (StoreProduct sp : delStore.getStoreProductList()) {
+                        tempsp = em.merge(sp);
+                        em.remove(tempsp);
+                    }
                     em.getTransaction().commit();
                 }
             }
-
-  */          
-     /*       Store s = storeList.get(jTable1.convertRowIndexToModel(selected));
-            for (StoreProduct sp : s.getStoreProductList()) {
-                em.remove(sp);
-            }*/
-          //  storeList.remove(selected);
-           // em.remove(selected);
-        }
-   /*     
-        boolean ok;
-        ok = true;
-        int s = jTable1.getSelectedRow();
-        if (s >= 0) {
-            Customer c = list1.get(jTable1.convertRowIndexToModel(s));
-            for (Vehicle v : c.getVehicleList()) {
-                if ((!v.getCardId().getCollectionList().isEmpty()) || (!v.getCardId().getPaymentList().isEmpty())) {
-                    ok = false;
-                    break;
-        }  }
-            if (ok) {
-                for (Vehicle v: c.getVehicleList()){
-                    em.remove(v);
-                }
-                list1.remove(c);
-                em.remove(c);
-            } else {
-                Utils.showMessage(this, String.format(Utils.msgCustomerCantBeDeleted, c.getFName(), c.getLName()), Utils.msgDialogTitle, JOptionPane.WARNING_MESSAGE);
+            // Καταστήματα χωρίς παραγγελίες απλά τα σβήνουμε.
+            else {
+                Store temp = em.merge(delStore);
+                em.remove(temp);
+                em.getTransaction().commit();
+                storeList.remove(selected);
             }
-            checkControls();  }  */
-    }//GEN-LAST:event_jBtnDeleteActionPerformed
+        }
+        editStoreButton.setEnabled(false);
+        delStoreButton.setEnabled(false);
+    }//GEN-LAST:event_delStoreButtonActionPerformed
 
-    private void jBtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditActionPerformed
-        
-        
-    }//GEN-LAST:event_jBtnEditActionPerformed
+    private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
+        // Τροποποίηση καταστήματος
+        int selected = jTable1.getSelectedRow();
+        // Καλούμε το AdminEditStore σε mode 2 (τροποποίηση)
+        AdminEditStore editStore = new AdminEditStore(storeList.get(selected),2);
+        editStore.setLocationRelativeTo(null);
+        editStore.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_editStoreButtonActionPerformed
 
+    private void newStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newStoreButtonActionPerformed
+        // Δημιουργία καταστήματος
+        Store selectedStore = new Store();
+        // Καλούμε το AdminEditStore σε mode 1 (δημιουργία)
+        AdminEditStore editStore = new AdminEditStore(selectedStore,1);
+        editStore.setLocationRelativeTo(null);
+        editStore.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_newStoreButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (jTable1.getSelectedRow() >= 0) {
+            editStoreButton.setEnabled(true);
+            delStoreButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -282,17 +274,16 @@ public class AdminStore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ExitButton;
     private javax.persistence.EntityManager WebMarketPUEntityManager0;
-    private javax.swing.JButton jBtnDelete;
-    private javax.swing.JButton jBtnEdit;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton delStoreButton;
+    private javax.swing.JButton editStoreButton;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton newStoreButton;
     private java.util.List<model.Store> storeList;
     private javax.persistence.Query storeQuery;
-    private javax.swing.JTextField textField1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
