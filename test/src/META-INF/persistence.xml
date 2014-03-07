@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>model.StoreProduct</class>
+    <class>model.Purchase</class>
+    <class>model.ProductPurchase</class>
+    <class>model.Product</class>
+    <class>model.BonusCheck</class>
+    <class>model.Store</class>
+    <class>model.Customer</class>
+    <class>test.Store</class>
+    <class>test.Customer</class>
+    <class>test.ProductPurchase</class>
+    <class>test.Product</class>
+    <class>test.Purchase</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/oldmarket"/>
+      <property name="javax.persistence.jdbc.password" value="pli24"/>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.user" value="pli24"/>
+    </properties>
+  </persistence-unit>
+</persistence>
