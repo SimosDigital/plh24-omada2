@@ -4,40 +4,33 @@ package webmarket;
  * @author Simos
  */
 
-import java.util.List;
-import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import model.Customer;
 
-public class AdminNewUser extends javax.swing.JFrame {
+public class AdminEditUser extends javax.swing.JFrame {
     
+    Customer selectedUser;
     private static EntityManager em;
-    private javax.persistence.Query query1;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String password;
-    private String address;
-    private String creditnumber;
-    private String creditowner;
-    private String creditcvv;
-    private String creditbank;
-    private Customer newcustomer = new Customer();
  
     /**
      * Creates new form AdminNewUser
      */
     
-    public AdminNewUser() {
-         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
-        // Δημιουργία του Entity Manager
-        em = emf.createEntityManager();        
+    public AdminEditUser() {
         initComponents();
     }
-   
+
+    public AdminEditUser (Customer selectedUser) {
+        this.selectedUser = selectedUser;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+        // Δημιουργία του Entity Manager
+        em = emf.createEntityManager();
+        initComponents();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +40,6 @@ public class AdminNewUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -71,12 +63,12 @@ public class AdminNewUser extends javax.swing.JFrame {
         creditBankComboBox = new javax.swing.JComboBox();
         OkButton = new javax.swing.JButton();
         ExitButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        pointsCardText = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση πελατών (administrator)");
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Στοιχεία νέου πελάτη");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Υποχρεωτικά", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
@@ -87,6 +79,47 @@ public class AdminNewUser extends javax.swing.JFrame {
         jLabel4.setText("email");
 
         jLabel5.setText("password");
+
+        firstNameText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                firstNameTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        lastNameText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                lastNameTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        emailText.setEnabled(false);
+        emailText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                emailTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        passwordText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                passwordTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,6 +170,16 @@ public class AdminNewUser extends javax.swing.JFrame {
 
         jLabel6.setText("Διεύθυνση");
 
+        addressText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                addressTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Στοιχεία πιστωτικής κάρτας", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
         jLabel7.setText("Αριθμός κάρτας");
@@ -147,8 +190,47 @@ public class AdminNewUser extends javax.swing.JFrame {
 
         jLabel10.setText("Τράπεζα");
 
+        creditNumberText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                creditNumberTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        creditOwnerText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                creditOwnerTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        creditCvvText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                creditCvvTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         creditBankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NBG", "EUROBANK", "ALPHA", "CITIBANK", "ΠΕΙΡΑΙΩΣ", "ΚΥΠΡΟΥ" }));
         creditBankComboBox.setToolTipText("");
+        creditBankComboBox.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                creditBankComboBoxAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -197,12 +279,12 @@ public class AdminNewUser extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addressText)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addressText)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -212,11 +294,11 @@ public class AdminNewUser extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addressText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        OkButton.setText("Εισαγωγή");
+        OkButton.setText("Αποθήκευση");
         OkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OkButtonActionPerformed(evt);
@@ -230,37 +312,66 @@ public class AdminNewUser extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Τροποποιήστε τα στοιχεία του πελάτη");
+
+        jLabel11.setText("Αρ. κάρτας πόντων");
+
+        pointsCardText.setEnabled(false);
+        pointsCardText.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                pointsCardTextAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(318, 318, 318)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(199, 199, 199)
                 .addComponent(OkButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ExitButton)
                 .addGap(208, 208, 208))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(58, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(pointsCardText, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(220, 220, 220)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(pointsCardText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OkButton)
                     .addComponent(ExitButton))
@@ -271,69 +382,33 @@ public class AdminNewUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
-        firstname = firstNameText.getText();
-        lastname = lastNameText.getText();
-        email = emailText.getText();
-        password = passwordText.getText();
-        
         // Ελέγχουμε αν υπάρχουν τα υποχρεωτικά πεδία
-        if ((firstname).equals("") || (lastname).equals("") || (email).equals("") || (password).equals("")){
-            JOptionPane.showMessageDialog(rootPane ,"Συμπληρώστε τα υποχρεωτικά πεδία" ,"             Προσοχή !",2);  
+        if ((firstNameText.getText()).equals("") || (lastNameText.getText()).equals("")
+            || (passwordText.getText()).equals("")){
+            JOptionPane.showMessageDialog(rootPane ,"Συμπληρώστε τα υποχρεωτικά πεδία" ,
+            "             Προσοχή !",2);  
         }
         else {
-            // Ελέγχουμε αν υπάρχει ήδη πελάτης με αυτό το email.
-            // Αν υπάρχει εμφανίζουμε τα στοιχεία του.
-            query1 = em.createQuery("select u from Customer u where u.email=:email");
-            query1.setParameter("email", email);
-            List<Customer> results = query1.getResultList();
-            if (results.size() ==1) {
-                JOptionPane.showMessageDialog(rootPane ,"Υπάρχει ήδη πελάτης με αυτό το email. \n"
-                  + "Στείλτε του τα στοιχεία εισόδου: \n Αριθμός κάρτας πόντων : " + results.get(0).getPointsCardNumber()
-                  + "\n Password : " + results.get(0).getPassword(),"             Προσοχή !",2);
-            }
-            // Δεν υπάρχει ήδη ο πελάτης άρα τον καταχωρούμε στη βάση.
-            else {
-                address = addressText.getText();
-                creditnumber = creditNumberText.getText();
-                creditowner = creditOwnerText.getText();
-                creditcvv = creditCvvText.getText();
-                creditbank = creditBankComboBox.getSelectedItem().toString();
-                String cardNumber;
-             
-                do {
-                    // Χρησιμοποιώντας τη μέθοδο randInt παράγει 2 τυχαίους τριψήφιους αριθμούς.
-                    String firstTriplet = Integer.toString(randInt(100,999));
-                    String secondTriplet = Integer.toString(randInt(100,999));
-                    cardNumber = firstTriplet + "-" + secondTriplet;
-                    // Εξασφαλίζουμε ότι ο αριθμός κάρτας δεν υπάρχει ήδη στη βάση δεδομένων.
-                    query1 = em.createQuery("select u from Customer u where u.pointsCardNumber=:pointsCardNumber");
-                    query1.setParameter("pointsCardNumber", cardNumber);
-                    results = query1.getResultList();
-                } while (results.size() == 1);
-             
-                newcustomer.setFirstName(firstname);
-                newcustomer.setLastName(lastname);
-                newcustomer.setEmail(email);
-                newcustomer.setPassword(password);
-                newcustomer.setAddress(address);
-                newcustomer.setCreditCardNumber(creditnumber);
-                newcustomer.setCreditCardOwnerName(creditowner);
-                newcustomer.setCreditCardCvv(creditcvv);
-                newcustomer.setCreditCardBank(creditbank);
-                newcustomer.setAvailablePoints(0);
-                newcustomer.setPointsCardNumber(cardNumber);
-             
-                //Αποθηκεύουμε το αντικείμενο Customer στη βάση δεδομένων
-                em.getTransaction().begin();
-                try {
-                    em.persist(newcustomer);            
-                    em.getTransaction().commit();
-                    String message = "Ο νέος πελάτης θα έχει κάρτα πόντων \n με αριθμό :" + cardNumber;
-                    JOptionPane.showMessageDialog(rootPane ,message ,"Επιτυχής εισαγωγή νέου πελάτη",1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    em.getTransaction().rollback();
-                }
+            selectedUser.setFirstName(firstNameText.getText());
+            selectedUser.setLastName(lastNameText.getText());
+            selectedUser.setPassword(passwordText.getText());
+            selectedUser.setAddress(addressText.getText());
+            selectedUser.setCreditCardNumber(creditNumberText.getText());
+            selectedUser.setCreditCardOwnerName(creditOwnerText.getText());
+            selectedUser.setCreditCardCvv(creditCvvText.getText());
+            selectedUser.setCreditCardBank(""+ creditBankComboBox.getSelectedItem());
+         
+            //Αποθηκεύουμε το αντικείμενο Customer στη βάση δεδομένων
+            Customer temp;
+            em.getTransaction().begin();
+            try {
+                temp = em.merge(selectedUser);
+                em.persist(temp);            
+                em.getTransaction().commit();
+                JOptionPane.showMessageDialog(rootPane, "Επιτυχής ενημέρωση\n στοιχείων πελάτου","  WebMarket",1);
+            } catch (Exception e) {
+                e.printStackTrace();
+                em.getTransaction().rollback();
             }
             AdminUser adminuser = new AdminUser();
             adminuser.setLocationRelativeTo(null);
@@ -343,12 +418,52 @@ public class AdminNewUser extends javax.swing.JFrame {
     }//GEN-LAST:event_OkButtonActionPerformed
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
-        JOptionPane.showMessageDialog(rootPane ,"Η εισαγωγή ακυρώθηκε","               Προσοχή !",2);
+        JOptionPane.showMessageDialog(rootPane ,"Οι αλλαγές ακυρώθηκαν" ,"WebMarket",1);
         AdminUser adminuser = new AdminUser();
         adminuser.setLocationRelativeTo(null);
         adminuser.setVisible(true);
         dispose();
     }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void firstNameTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_firstNameTextAncestorAdded
+        firstNameText.setText(selectedUser.getFirstName());
+    }//GEN-LAST:event_firstNameTextAncestorAdded
+
+    private void lastNameTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lastNameTextAncestorAdded
+        lastNameText.setText(selectedUser.getLastName());
+    }//GEN-LAST:event_lastNameTextAncestorAdded
+
+    private void emailTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_emailTextAncestorAdded
+        emailText.setText(selectedUser.getEmail());
+    }//GEN-LAST:event_emailTextAncestorAdded
+
+    private void passwordTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_passwordTextAncestorAdded
+        passwordText.setText(selectedUser.getPassword());
+    }//GEN-LAST:event_passwordTextAncestorAdded
+
+    private void addressTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_addressTextAncestorAdded
+        addressText.setText(selectedUser.getAddress());
+    }//GEN-LAST:event_addressTextAncestorAdded
+
+    private void creditNumberTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_creditNumberTextAncestorAdded
+        creditNumberText.setText(selectedUser.getCreditCardNumber());
+    }//GEN-LAST:event_creditNumberTextAncestorAdded
+
+    private void creditOwnerTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_creditOwnerTextAncestorAdded
+        creditOwnerText.setText(selectedUser.getCreditCardOwnerName());
+    }//GEN-LAST:event_creditOwnerTextAncestorAdded
+
+    private void creditCvvTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_creditCvvTextAncestorAdded
+        creditCvvText.setText(selectedUser.getCreditCardCvv());
+    }//GEN-LAST:event_creditCvvTextAncestorAdded
+
+    private void creditBankComboBoxAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_creditBankComboBoxAncestorAdded
+        creditBankComboBox.setSelectedItem(selectedUser.getCreditCardBank());
+    }//GEN-LAST:event_creditBankComboBoxAncestorAdded
+
+    private void pointsCardTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_pointsCardTextAncestorAdded
+        pointsCardText.setText(selectedUser.getPointsCardNumber());
+    }//GEN-LAST:event_pointsCardTextAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -397,6 +512,7 @@ public class AdminNewUser extends javax.swing.JFrame {
     private javax.swing.JTextField firstNameText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -410,17 +526,6 @@ public class AdminNewUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField lastNameText;
     private javax.swing.JTextField passwordText;
+    private javax.swing.JTextField pointsCardText;
     // End of variables declaration//GEN-END:variables
-    
-    /**
-    * Επιστρέφει ένα ψευδο-τυχαίο αριθμό μεταξύ min και max.    * 
-    * @param min Η ελάχιστη τιμή
-    * @param max Η μέγιστη τιμή η οποία πρέπει να είναι μεγαλύτερη από τη Min.
-    * @return Ακέραιο μεταξύ min και max.    * 
-    */
-    private int randInt(int min, int max) {       
-       Random rand = new Random();       
-       int randomNum = rand.nextInt((max - min) + 1) + min;
-       return randomNum;
-    }
-}
+ }
