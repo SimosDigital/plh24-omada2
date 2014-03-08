@@ -18,7 +18,6 @@ public class UserSetMarket extends javax.swing.JFrame {
     Customer logedUser;
     public void setLogedUser (Customer logedUser) {
         this.logedUser = logedUser;
-                      
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -111,6 +110,7 @@ public class UserSetMarket extends javax.swing.JFrame {
 
     private void UserQuantitySelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserQuantitySelectButtonActionPerformed
         UserQuantitySelect userquantityselect = new UserQuantitySelect();
+	userquantityselect.setLogedUser(logedUser);
         userquantityselect.setLocationRelativeTo(null);
         userquantityselect.setVisible(true);
         dispose();
