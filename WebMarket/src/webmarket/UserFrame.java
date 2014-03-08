@@ -168,7 +168,11 @@ public class UserFrame extends javax.swing.JFrame {
         
         JOptionPane.showMessageDialog(rootPane ,"Σας ευχαριστούμε για την εμπιστοσύνη σας...     " ,"     WebMarket",1);
         
-        System.exit(0);
+        LoginFrame loginFrame = new LoginFrame();
+ //     loginFrame.setLogedUser(logedUser); 
+        loginFrame.setLocationRelativeTo(null);
+        loginFrame.setVisible(true);
+        dispose();
                 
     }//GEN-LAST:event_ExitButtonActionPerformed
 
