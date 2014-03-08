@@ -1,5 +1,11 @@
 package webmarket;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import model.Customer;
 /**
  * @author Simos
  */
@@ -9,11 +15,19 @@ public class UserBasket extends javax.swing.JFrame {
     /**
      * Creates new form UserBasket
      */
+    private static EntityManager em;
+    private javax.persistence.Query query1;
+    private Integer customerId;
+    Customer logedUser;
 
     public UserBasket() {
-        initComponents();
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+         em = emf.createEntityManager();        
+         initComponents();
     }
-
+    public void setLogedUser (Customer logedUser) {
+        this.logedUser = logedUser;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,6 +193,7 @@ public class UserBasket extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserMarket usermarket = new UserMarket();
+	usermarket.setLogedUser(logedUser);
         usermarket.setLocationRelativeTo(null);
         usermarket.setVisible(true);
         dispose();
