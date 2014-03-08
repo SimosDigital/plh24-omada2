@@ -1,6 +1,7 @@
 package webmarket;
 
 import model.Customer;
+import model.Store;
 
 /**
  * @author Simos
@@ -11,13 +12,17 @@ public class UserSetMarket extends javax.swing.JFrame {
     /**
      * Creates new form UserSetMarket
      */
+    Customer logedUser;
+    Store    selectedStore;
 
     public UserSetMarket() {
         initComponents();
     }
-    Customer logedUser;
     public void setLogedUser (Customer logedUser) {
-        this.logedUser = logedUser;
+        this.logedUser     = logedUser;
+    }
+    public void setStore (Store selectedStore) {
+        this.selectedStore = selectedStore;
     }
     /**
      * This method is called from within the constructor to initialize the form.
