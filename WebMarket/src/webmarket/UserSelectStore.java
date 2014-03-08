@@ -1,23 +1,33 @@
 package webmarket;
 
-import model.Customer;
-
 /**
  * @author Simos
  */
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import model.Customer;
+import model.Store;
+import model.StoreProduct;
+
 public class UserSelectStore extends javax.swing.JFrame {
 
+    private static EntityManager em;
+    
     /**
-     * Creates new form UserSelectStore
+     * Creates new form AdminStore
      */
-    Customer logedUser;
+    Customer logedUser;    
     public UserSelectStore() {
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+        // Δημιουργία του Entity Manager
+        em = emf.createEntityManager();
         initComponents();
     }
     public void setLogedUser (Customer logedUser) {
         this.logedUser = logedUser;
-                      
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,23 +37,54 @@ public class UserSelectStore extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
+                bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+                WebMarketPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("WebMarketPU").createEntityManager();
+                storeQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager0.createQuery("SELECT s FROM Store s ");
+                storeList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(storeQuery.getResultList());
+                jScrollPane1 = new javax.swing.JScrollPane();
+                jTable1 = new javax.swing.JTable();
                 jLabel1 = new javax.swing.JLabel();
-                choice1 = new java.awt.Choice();
-                OkButton = new javax.swing.JButton();
+                editStoreButton = new javax.swing.JButton();
+                exitButton = new javax.swing.JButton();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-                setTitle("WebMarket - Αγορά προϊόντων");
+                setTitle("WebMarket - Διαχείριση καταστημάτων (administrator)");
+
+                org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, storeList, jTable1);
+                org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${name}"));
+                columnBinding.setColumnName("Όνομα");
+                columnBinding.setColumnClass(String.class);
+                columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${address}"));
+                columnBinding.setColumnName("Διεύθυνση");
+                columnBinding.setColumnClass(String.class);
+                bindingGroup.addBinding(jTableBinding);
+                jTableBinding.bind();
+                jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jTable1MouseClicked(evt);
+                        }
+                });
+                jScrollPane1.setViewportView(jTable1);
+                if (jTable1.getColumnModel().getColumnCount() > 0) {
+                        jTable1.getColumnModel().getColumn(0).setPreferredWidth(45);
+                }
 
                 jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-                jLabel1.setText("Επιλέξτε κατάστημα");
+                jLabel1.setText("Λίστα καταστημάτων");
 
-                choice1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-
-                OkButton.setText("ΟΚ");
-                OkButton.addActionListener(new java.awt.event.ActionListener() {
+                editStoreButton.setText("Επιλογή Καταστήματος");
+                editStoreButton.setEnabled(false);
+                editStoreButton.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                OkButtonActionPerformed(evt);
+                                editStoreButtonActionPerformed(evt);
+                        }
+                });
+
+                exitButton.setText("Πίσω");
+                exitButton.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                exitButtonActionPerformed(evt);
                         }
                 });
 
@@ -52,42 +93,69 @@ public class UserSelectStore extends javax.swing.JFrame {
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(187, 187, 187)
-                                .addComponent(jLabel1)
-                                .addContainerGap(239, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(OkButton)
-                                                .addGap(66, 66, 66))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(141, 141, 141))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(294, 294, 294)
+                                                .addComponent(jLabel1))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(68, 68, 68)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(162, 162, 162)
+                                                                .addComponent(editStoreButton)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(exitButton)))))
+                                .addContainerGap(73, Short.MAX_VALUE))
                 );
+
+                layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {editStoreButton, exitButton});
+
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
+                                .addContainerGap()
                                 .addComponent(jLabel1)
-                                .addGap(22, 22, 22)
-                                .addComponent(choice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
-                                .addComponent(OkButton)
-                                .addGap(54, 54, 54))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(editStoreButton)
+                                        .addComponent(exitButton))
+                                .addGap(47, 47, 47))
                 );
+
+                bindingGroup.bind();
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
-    private void OkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OkButtonActionPerformed
-        UserSetMarket usersetmarket = new UserSetMarket();
-        usersetmarket.setLogedUser(logedUser); 
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+	UserMarket usermarket = new UserMarket();
+	usermarket.setLogedUser(logedUser);
+        usermarket.setLocationRelativeTo(null);
+        usermarket.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
+
+    private void editStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editStoreButtonActionPerformed
+        // Επιλογή καταστήματος
+        int selectedStore = jTable1.getSelectedRow();
+        // Καλούμε το UserSetMarket  
+	UserSetMarket usersetmarket = new UserSetMarket();
+        usersetmarket.setStore(storeList.get(selectedStore)); 
+        usersetmarket.setLogedUser(logedUser);
         usersetmarket.setLocationRelativeTo(null);
         usersetmarket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_OkButtonActionPerformed
+    }//GEN-LAST:event_editStoreButtonActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (jTable1.getSelectedRow() >= 0) {
+            editStoreButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -124,8 +192,14 @@ public class UserSelectStore extends javax.swing.JFrame {
     }
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JButton OkButton;
-        private java.awt.Choice choice1;
+        private javax.persistence.EntityManager WebMarketPUEntityManager0;
+        private javax.swing.JButton editStoreButton;
+        private javax.swing.JButton exitButton;
         private javax.swing.JLabel jLabel1;
+        private javax.swing.JScrollPane jScrollPane1;
+        private javax.swing.JTable jTable1;
+        private java.util.List<model.Store> storeList;
+        private javax.persistence.Query storeQuery;
+        private org.jdesktop.beansbinding.BindingGroup bindingGroup;
         // End of variables declaration//GEN-END:variables
 }
