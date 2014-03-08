@@ -5,6 +5,7 @@ package webmarket;
  */
 
 import javax.swing.JOptionPane;
+import model.Customer;
 
 public class UserQuantitySelect extends javax.swing.JFrame {
 
@@ -14,7 +15,10 @@ public class UserQuantitySelect extends javax.swing.JFrame {
     public UserQuantitySelect() {
         initComponents();
     }
-
+    Customer logedUser;
+    public void setLogedUser (Customer logedUser) {
+        this.logedUser = logedUser;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,6 +107,7 @@ public class UserQuantitySelect extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JOptionPane.showMessageDialog(rootPane ,"Το προϊόν προστέθηκε με επιτυχία στο καλάθι σας" ,"     Αγορά προϊόντων",1);
         UserSetMarket usersetmarket = new UserSetMarket();
+	usersetmarket.setLogedUser(logedUser);
         usersetmarket.setLocationRelativeTo(null);
         usersetmarket.setVisible(true);
         dispose();
@@ -110,6 +115,7 @@ public class UserQuantitySelect extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserSetMarket usersetmarket = new UserSetMarket();
+	usersetmarket.setLogedUser(logedUser);
         usersetmarket.setLocationRelativeTo(null);
         usersetmarket.setVisible(true);
         dispose();
