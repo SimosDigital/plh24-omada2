@@ -1,5 +1,7 @@
 package webmarket;
 
+import model.Customer;
+
 /**
  * @author Simos
  */
@@ -13,7 +15,11 @@ public class UserSetMarket extends javax.swing.JFrame {
     public UserSetMarket() {
         initComponents();
     }
-
+    Customer logedUser;
+    public void setLogedUser (Customer logedUser) {
+        this.logedUser = logedUser;
+                      
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +103,7 @@ public class UserSetMarket extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserMarket usermarket = new UserMarket();
+	usermarket.setLogedUser(logedUser);
         usermarket.setLocationRelativeTo(null);
         usermarket.setVisible(true);
         dispose();
@@ -111,6 +118,7 @@ public class UserSetMarket extends javax.swing.JFrame {
 
     private void UserBasketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserBasketButtonActionPerformed
         UserBasket userbasket = new UserBasket();
+	userbasket.setLogedUser(logedUser);
         userbasket.setLocationRelativeTo(null);
         userbasket.setVisible(true);
         dispose();

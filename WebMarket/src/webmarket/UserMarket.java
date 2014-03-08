@@ -140,6 +140,7 @@ public class UserMarket extends javax.swing.JFrame {
 
     private void UserBasketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserBasketButtonActionPerformed
         UserBasket userbasket = new UserBasket();
+	userbasket.setLogedUser(logedUser);
         userbasket.setLocationRelativeTo(null);
         userbasket.setVisible(true);
         dispose();
@@ -147,6 +148,7 @@ public class UserMarket extends javax.swing.JFrame {
 
     private void UserSelectStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserSelectStoreButtonActionPerformed
         UserSelectStore userselectstore = new UserSelectStore();
+	userselectstore.setLogedUser(logedUser);
         userselectstore.setLocationRelativeTo(null);
         userselectstore.setVisible(true);
         dispose();
