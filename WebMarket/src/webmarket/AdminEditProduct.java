@@ -45,7 +45,7 @@ public class AdminEditProduct extends javax.swing.JFrame {
     private void initComponents() {
 
         titleLabel = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         nameText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         priceText = new javax.swing.JTextField();
@@ -69,10 +69,10 @@ public class AdminEditProduct extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Ακύρωση");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setText("Ακύρωση");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -155,12 +155,12 @@ public class AdminEditProduct extends javax.swing.JFrame {
                         .addGap(113, 113, 113))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(pointsText, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(13, 13, 13)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(pointsText, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(priceText, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jButton2))
+                            .addComponent(exitButton))
                         .addGap(78, 78, 78))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(96, 96, 96)
@@ -201,7 +201,7 @@ public class AdminEditProduct extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
-                    .addComponent(jButton2))
+                    .addComponent(exitButton))
                 .addGap(62, 62, 62))
         );
 
@@ -213,13 +213,13 @@ public class AdminEditProduct extends javax.swing.JFrame {
         if (mode == 2) titleLabel.setText("Τροποποιήστε τα στοιχεία του προϊόντος");
     }//GEN-LAST:event_titleLabelAncestorAdded
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         JOptionPane.showMessageDialog(rootPane ,"Οι αλλαγές ακυρώθηκαν" ,"WebMarket",1);
         AdminProduct adminProduct = new AdminProduct();
         adminProduct.setLocationRelativeTo(null);
         adminProduct.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     private void nameTextAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_nameTextAncestorAdded
         nameText.setText(selectedProduct.getName());
@@ -309,7 +309,7 @@ public class AdminEditProduct extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField codeText;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
