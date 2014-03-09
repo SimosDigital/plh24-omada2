@@ -2,244 +2,26 @@
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JTextField" name="logedUserText2">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-    </Component>
-    <Component class="javax.persistence.EntityManager" name="WebMarketPUEntityManager">
+    <Component class="javax.persistence.EntityManager" name="WebMarketPUEntityManager0">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="WebMarketPU"/>
       </Properties>
     </Component>
-    <Component class="javax.persistence.Query" name="customerQuery">
+    <Component class="javax.persistence.Query" name="bonusCheckQuery">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT c FROM Customer c"/>
+        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b WHERE b.customerId=:customerId"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="customerList">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="customerQuery"/>
+          <ComponentRef name="WebMarketPUEntityManager0"/>
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.Customer&gt;"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager0.createQuery(&quot;SELECT b FROM BonusCheck b WHERE b.customerId=:customerId&quot;).setParameter(&quot;customerId&quot;,logedUser)"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
     </Component>
     <Component class="java.util.List" name="bonusCheckList">
       <Properties>
         <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
           <ComponentRef name="bonusCheckQuery"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="customerQuery1">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT c FROM Customer c"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="customerList1">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="customerQuery1"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.Customer&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery1">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList1">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery1"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery2">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList2">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery2"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery3">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList3">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery3"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery4">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList4">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery4"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery5">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList5">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery5"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery6">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList6">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery6"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery7">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList7">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery7"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery8">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList8">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery8"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery9">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList9">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery9"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;model.BonusCheck&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.persistence.Query" name="bonusCheckQuery10">
-      <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT b FROM BonusCheck b"/>
-        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="WebMarketPUEntityManager"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="java.util.List" name="bonusCheckList10">
-      <Properties>
-        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
-          <ComponentRef name="bonusCheckQuery10"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -275,19 +57,16 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" pref="461" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="logedUserText1" min="-2" pref="171" max="-2" attributes="0"/>
-                                  <Component id="logedUserText3" min="-2" pref="171" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="customerData" min="-2" pref="375" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="204" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -295,27 +74,22 @@
                       <Component id="ExitButton" min="-2" pref="135" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="logedUserText1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="logedUserText3" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <Component id="customerData" min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="280" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="325" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="ExitButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="40" max="32767" attributes="0"/>
@@ -330,22 +104,12 @@
           <Font name="Tahoma" size="18" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="3.1.3. &#x3a0;&#x3c1;&#x3bf;&#x3b2;&#x3bf;&#x3bb;&#x3ae; &#x3b4;&#x3c9;&#x3c1;&#x3bf;&#x3b5;&#x3c0;&#x3b9;&#x3c4;&#x3b1;&#x3b3;&#x3ce;&#x3bd;"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="logedUserText1">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" value="&#x3a0;&#x3c1;&#x3bf;&#x3b2;&#x3bf;&#x3bb;&#x3ae; &#x3b4;&#x3c9;&#x3c1;&#x3bf;&#x3b5;&#x3c0;&#x3b9;&#x3c4;&#x3b1;&#x3b3;&#x3ce;&#x3bd;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x38c;&#x3bd;&#x3bf;&#x3bc;&#x3b1;"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x395;&#x3c0;&#x3ce;&#x3bd;&#x3c5;&#x3bc;&#x3bf;"/>
+        <Property name="text" type="java.lang.String" value="&#x3a0;&#x3b5;&#x3bb;&#x3ac;&#x3c4;&#x3b7;&#x3c2;  :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="ExitButton">
@@ -355,11 +119,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ExitButtonActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="logedUserText3">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
@@ -371,54 +130,40 @@
         <Component class="javax.swing.JTable" name="jTable2">
           <Properties>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
+              <TableColumnModel selectionModel="0"/>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="bonusCheckList10" target="jTable2" targetPath="elements" updateStrategy="0" immediately="true">
+            <BindingProperty name="elements" source="bonusCheckList" target="jTable2" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${checkId}">
-                <BindingParameter name="NAME" value="&#x39a;&#x3c9;&#x3b4;&#x3b9;&#x3ba;&#x3cc;&#x3c2; &#x395;&#x3c0;&#x3b9;&#x3c4;&#x3b1;&#x3b3;&#x3ae;&#x3c2;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
               </Subbinding>
               <Subbinding sourcePath="${dateIn}">
-                <BindingParameter name="NAME" value="&#x397;&#x3bc;&#x3b5;&#x3c1;&#x3bf;&#x3bc;&#x3b7;&#x3bd;&#x3af;&#x3b1;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
               </Subbinding>
               <Subbinding sourcePath="${amount}">
-                <BindingParameter name="NAME" value="&#x3a0;&#x3bf;&#x3c3;&#x3cc;"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${purchase}">
-                <BindingParameter name="NAME" value="&#x39a;&#x3b1;&#x3c4;&#x3ac;&#x3c3;&#x3c4;&#x3b1;&#x3c3;&#x3b7;"/>
+              <Subbinding sourcePath="${purchaseId}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="model.Purchase.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="customerData">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="14" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="customerDataAncestorAdded"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
