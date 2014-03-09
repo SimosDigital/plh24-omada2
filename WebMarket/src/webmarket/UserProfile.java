@@ -169,8 +169,7 @@ public class UserProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_UserEditProfileButtonActionPerformed
 
     private void UserChecksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserChecksButtonActionPerformed
-        UserChecks userchecks = new UserChecks();
-        userchecks.setLogedUser(logedUser); 
+        UserChecks userchecks = new UserChecks(logedUser);
         userchecks.setLocationRelativeTo(null);
         userchecks.setVisible(true);
         dispose();

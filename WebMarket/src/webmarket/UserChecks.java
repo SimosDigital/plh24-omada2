@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 import model.Customer;
+import model.Store;
 
 public class UserChecks extends javax.swing.JFrame {
 
@@ -19,13 +20,18 @@ public class UserChecks extends javax.swing.JFrame {
      */
     
     private static EntityManager em;
-
     Customer logedUser;
     
     public UserChecks() {
-         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
-         em = emf.createEntityManager();        
          initComponents();
+    }
+    
+        public UserChecks (Customer logedUser) {
+        this.logedUser = logedUser;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
+        // Δημιουργία του Entity Manager
+        em = emf.createEntityManager();
+        initComponents();
     }
 
     /**
@@ -38,57 +44,24 @@ public class UserChecks extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        logedUserText2 = new javax.swing.JTextField();
-        WebMarketPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("WebMarketPU").createEntityManager();
-        customerQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT c FROM Customer c");
-        customerList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : customerQuery.getResultList();
-        bonusCheckQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
+        WebMarketPUEntityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("WebMarketPU").createEntityManager();
+        bonusCheckQuery = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager0.createQuery("SELECT b FROM BonusCheck b WHERE b.customerId=:customerId").setParameter("customerId",logedUser);
         bonusCheckList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery.getResultList();
-        customerQuery1 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT c FROM Customer c");
-        customerList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : customerQuery1.getResultList();
-        bonusCheckQuery1 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery1.getResultList();
-        bonusCheckQuery2 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery2.getResultList();
-        bonusCheckQuery3 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList3 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery3.getResultList();
-        bonusCheckQuery4 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList4 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery4.getResultList();
-        bonusCheckQuery5 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList5 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery5.getResultList();
-        bonusCheckQuery6 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList6 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery6.getResultList();
-        bonusCheckQuery7 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList7 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery7.getResultList();
-        bonusCheckQuery8 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList8 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery8.getResultList();
-        bonusCheckQuery9 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList9 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery9.getResultList();
-        bonusCheckQuery10 = java.beans.Beans.isDesignTime() ? null : WebMarketPUEntityManager.createQuery("SELECT b FROM BonusCheck b");
-        bonusCheckList10 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bonusCheckQuery10.getResultList();
         jLabel1 = new javax.swing.JLabel();
-        logedUserText1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         ExitButton = new javax.swing.JButton();
-        logedUserText3 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-
-        logedUserText2.setEnabled(false);
+        customerData = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("WebMarket - Διαχείριση Προφίλ");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("3.1.3. Προβολή δωροεπιταγών");
+        jLabel1.setText("Προβολή δωροεπιταγών");
 
-        logedUserText1.setEnabled(false);
-
-        jLabel8.setText("Όνομα");
-
-        jLabel6.setText("Επώνυμο");
+        jLabel8.setText("Πελάτης  :");
 
         ExitButton.setText("Επιστροφή");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,23 +70,33 @@ public class UserChecks extends javax.swing.JFrame {
             }
         });
 
-        logedUserText3.setEnabled(false);
-
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bonusCheckList10, jTable2);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bonusCheckList, jTable2);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${checkId}"));
-        columnBinding.setColumnName("Κωδικός Επιταγής");
+        columnBinding.setColumnName("Check Id");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dateIn}"));
-        columnBinding.setColumnName("Ημερομηνία");
+        columnBinding.setColumnName("Date In");
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${amount}"));
-        columnBinding.setColumnName("Ποσό");
+        columnBinding.setColumnName("Amount");
         columnBinding.setColumnClass(Float.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${purchase}"));
-        columnBinding.setColumnName("Κατάσταση");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${purchaseId}"));
+        columnBinding.setColumnName("Purchase Id");
+        columnBinding.setColumnClass(model.Purchase.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(jTable2);
+
+        customerData.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        customerData.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                customerDataAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,36 +107,30 @@ public class UserChecks extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(logedUserText1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(logedUserText3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(customerData, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(197, 197, 197)
                         .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(logedUserText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(logedUserText3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addComponent(customerData, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(ExitButton)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -179,12 +156,10 @@ public class UserChecks extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ExitButtonActionPerformed
 
-    public void setLogedUser (Customer logedUser) {
-        this.logedUser = logedUser;
-                      
-        logedUserText1.setText(logedUser.getFirstName());
-        logedUserText3.setText(logedUser.getLastName());
-    }
+    private void customerDataAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_customerDataAncestorAdded
+        customerData.setText(logedUser.getLastName() + logedUser.getFirstName());
+    }//GEN-LAST:event_customerDataAncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -222,41 +197,14 @@ public class UserChecks extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ExitButton;
-    private javax.persistence.EntityManager WebMarketPUEntityManager;
+    private javax.persistence.EntityManager WebMarketPUEntityManager0;
     private java.util.List<model.BonusCheck> bonusCheckList;
-    private java.util.List<model.BonusCheck> bonusCheckList1;
-    private java.util.List<model.BonusCheck> bonusCheckList10;
-    private java.util.List<model.BonusCheck> bonusCheckList2;
-    private java.util.List<model.BonusCheck> bonusCheckList3;
-    private java.util.List<model.BonusCheck> bonusCheckList4;
-    private java.util.List<model.BonusCheck> bonusCheckList5;
-    private java.util.List<model.BonusCheck> bonusCheckList6;
-    private java.util.List<model.BonusCheck> bonusCheckList7;
-    private java.util.List<model.BonusCheck> bonusCheckList8;
-    private java.util.List<model.BonusCheck> bonusCheckList9;
     private javax.persistence.Query bonusCheckQuery;
-    private javax.persistence.Query bonusCheckQuery1;
-    private javax.persistence.Query bonusCheckQuery10;
-    private javax.persistence.Query bonusCheckQuery2;
-    private javax.persistence.Query bonusCheckQuery3;
-    private javax.persistence.Query bonusCheckQuery4;
-    private javax.persistence.Query bonusCheckQuery5;
-    private javax.persistence.Query bonusCheckQuery6;
-    private javax.persistence.Query bonusCheckQuery7;
-    private javax.persistence.Query bonusCheckQuery8;
-    private javax.persistence.Query bonusCheckQuery9;
-    private java.util.List<model.Customer> customerList;
-    private java.util.List<model.Customer> customerList1;
-    private javax.persistence.Query customerQuery;
-    private javax.persistence.Query customerQuery1;
+    private javax.swing.JLabel customerData;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField logedUserText1;
-    private javax.swing.JTextField logedUserText2;
-    private javax.swing.JTextField logedUserText3;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
