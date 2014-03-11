@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Random;
 import model.Store;
 import model.BonusCheck;
@@ -51,7 +52,7 @@ public class Test1 {
         storesList = storesQuery.getResultList();
         int sCount = customersList.size();
         randStore  = new Random();
-        List<ProductPurchase> ppList = null ;
+        ArrayList<ProductPurchase> ppList = new ArrayList<ProductPurchase>();
 	Integer pointsEarned = 0;
 	Float   amount       = 0F;
 // Κάνουμε τόσες αγορές όσοι και οι πελάτες
@@ -71,7 +72,6 @@ public class Test1 {
 // που λειτουργεί σαν καλάθι                     
           Purchase        pr = new Purchase();
           ProductPurchase pp = new ProductPurchase();
-          ppList       = null ;
 	  pointsEarned = 0;
 	  amount       = 0F;
           for (Product p : productsList) {
