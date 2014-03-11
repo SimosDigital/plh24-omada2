@@ -23,54 +23,52 @@ import model.ProductPurchase;
 
 public class Test1 {
     private static EntityManager em;
-    private static javax.persistence.Query customersQuery;	
-    private static javax.persistence.Query storesQuery;	
-    private static javax.persistence.Query storeProductsQuery;	
-    private static javax.persistence.Query productQuery;	
-    static List<Customer> customersList;   
-    static List<Store>    storesList;   
-    static List<StoreProduct>  storeProductsList;   
-    static List<Product>  productsList;   
-//  static StoreProduct sp;   
+    private static javax.persistence.Query customersQuery;      
+    private static javax.persistence.Query storesQuery;
+    private static javax.persistence.Query storeProductsQuery;  
+    private static javax.persistence.Query productQuery;        
+    static List<Customer> customersList;  
+    static List<Store>    storesList;  
+    static List<StoreProduct>  storeProductsList;  
+    static List<Product>  productsList;  
     static int    value;
+    static Product p;
     static Random randCustomer;
     static Random randStore;
     static Random randProduct;
     public static void main(String args[]) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebMarketPU");
-        em = emf.createEntityManager(); 
-        customersQuery = em.createQuery("SELECT c FROM Customer c");
-        storesQuery    = em.createQuery("SELECT s FROM Store s");
+        em = emf.createEntityManager();
+        customersQuery     = em.createQuery("SELECT c  FROM Customer c");
+        storesQuery        = em.createQuery("SELECT s  FROM Store s");
         storeProductsQuery = em.createQuery("SELECT sp.productId FROM StoreProduct sp WHERE sp.storeId=:storeId");
-        productQuery = em.createQuery("SELECT p FROM Product p WHERE p.productId = :productId");
+        productQuery       = em.createQuery("SELECT p.productId  FROM Product p WHERE p.productId=:productId");
 // Διαβάζουμε τους πελάτες
         customersList = customersQuery.getResultList();
-	int cCount    = customersList.size();
-	randCustomer = new Random(); 
+        int cCount    = customersList.size();
+        randCustomer = new Random();
 // Διαβάζουμε τα καταστηματα
-	storesList = storesQuery.getResultList();
-	int sCount = customersList.size();
-	int pCount;
+        storesList = storesQuery.getResultList();
+        int sCount = customersList.size();
         int loopCustomers = cCount;
 // Κάνουμε τόσες αγορές όσοι και οι πελάτες
-	while (loopCustomers > 0) {
-          value = randCustomer.nextInt(cCount) +1;	
-	  Customer c = customersList.get(value);
+        while (loopCustomers > 0) {
+          value = randCustomer.nextInt(cCount);      
+          Customer c = customersList.get(value);
        System.out.println(c);
 // Για κάθε αγορά διαλέγουμε στην τύχη ένα κατάστημα
-	  randStore = new Random(); 
-          value = randStore.nextInt(sCount) +1;	
-	  Store s = storesList.get(value);
+          randStore = new Random();
+          value = randStore.nextInt(sCount);
+          Store s = storesList.get(value);
        System.out.println(s);
 // Για κάθε κατάστημα διαβάζουμε τα προιόντα του
           storeProductsQuery.setParameter("storeId", s);
-	  productsList = storeProductsQuery.getResultList();
-	  pCount = productsList.size();
-          for (Product p : productsList) { 
+          productsList = storeProductsQuery.getResultList();
+          for (Product p : productsList) {
              System.out.println(p);
           }
-	  loopCustomers -= 1;
-	}
+          loopCustomers -= 1;
+        }
 
     }
 }

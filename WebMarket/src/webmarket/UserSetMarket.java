@@ -23,7 +23,7 @@ public class UserSetMarket extends javax.swing.JFrame {
     }
     public void setStore (Store selectedStore) {
         this.selectedStore = selectedStore;
-	this.selectedStoreText1.setText(selectedStore.getName());
+        this.selectedStoreText1.setText(selectedStore.getName());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,7 +128,7 @@ public class UserSetMarket extends javax.swing.JFrame {
 
     private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
         UserMarket usermarket = new UserMarket();
-	usermarket.setLogedUser(logedUser);
+        usermarket.setLogedUser(logedUser);
         usermarket.setLocationRelativeTo(null);
         usermarket.setVisible(true);
         dispose();
@@ -136,7 +136,7 @@ public class UserSetMarket extends javax.swing.JFrame {
 
     private void UserQuantitySelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserQuantitySelectButtonActionPerformed
         UserQuantitySelect userquantityselect = new UserQuantitySelect();
-	userquantityselect.setLogedUser(logedUser);
+        userquantityselect.setLogedUser(logedUser);
         userquantityselect.setLocationRelativeTo(null);
         userquantityselect.setVisible(true);
         dispose();
@@ -144,7 +144,7 @@ public class UserSetMarket extends javax.swing.JFrame {
 
     private void UserBasketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserBasketButtonActionPerformed
         UserBasket userbasket = new UserBasket();
-	userbasket.setLogedUser(logedUser);
+        userbasket.setLogedUser(logedUser);
         userbasket.setLocationRelativeTo(null);
         userbasket.setVisible(true);
         dispose();
@@ -161,7 +161,7 @@ public class UserSetMarket extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
