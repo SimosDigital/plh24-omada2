@@ -13,7 +13,7 @@ public class UserMarket extends javax.swing.JFrame {
      */
 
     Customer logedUser;
-    
+   
     public UserMarket() {
         initComponents();
     }
@@ -140,7 +140,7 @@ public class UserMarket extends javax.swing.JFrame {
 
     private void UserBasketButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserBasketButtonActionPerformed
         UserBasket userbasket = new UserBasket();
-	userbasket.setLogedUser(logedUser);
+        userbasket.setLogedUser(logedUser);
         userbasket.setLocationRelativeTo(null);
         userbasket.setVisible(true);
         dispose();
@@ -148,7 +148,7 @@ public class UserMarket extends javax.swing.JFrame {
 
     private void UserSelectStoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserSelectStoreButtonActionPerformed
         UserSelectStore userselectstore = new UserSelectStore();
-	userselectstore.setLogedUser(logedUser);
+        userselectstore.setLogedUser(logedUser);
         userselectstore.setLocationRelativeTo(null);
         userselectstore.setVisible(true);
         dispose();
@@ -167,7 +167,7 @@ public class UserMarket extends javax.swing.JFrame {
         logedUserText1.setText(logedUser.getFirstName());
         logedUserText2.setText(logedUser.getFirstName());
     }
-    
+   
     /**
      * @param args the command line arguments
      */
@@ -175,7 +175,7 @@ public class UserMarket extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

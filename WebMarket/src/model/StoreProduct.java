@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "StoreProduct.findAll", query = "SELECT s FROM StoreProduct s"),
+    @NamedQuery(name = "StoreProduct.findByStoreId", query = "SELECT s FROM StoreProduct s WHERE s.storeId = :storeId"),
     @NamedQuery(name = "StoreProduct.findByProductStoreId", query = "SELECT s FROM StoreProduct s WHERE s.productStoreId = :productStoreId")})
 public class StoreProduct implements Serializable {
     @Transient
