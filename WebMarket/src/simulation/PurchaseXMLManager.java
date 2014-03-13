@@ -32,6 +32,7 @@ public class PurchaseXMLManager {
     private final DateFormat df;
     private File xmlFile;
     private boolean isNewDocument = true;
+    private Integer ok;
     
     public PurchaseXMLManager(File xmlFile){
         this.xmlFile = xmlFile;        
@@ -53,7 +54,7 @@ public class PurchaseXMLManager {
         }
     }
     
-    public void writeXML(List<Purchase> purchases){        
+    public void writeXML(Purchase p, Integer ok){        
         Document document = readXmlDocument();
         try {            
             if (isNewDocument){ // Create New file
@@ -65,7 +66,6 @@ public class PurchaseXMLManager {
             }
             Element root = document.getDocumentElement();
             
-            for (Purchase p:purchases){
                 // purchase elements                
                 Element purchase = document.createElement("Purchase");
                 root.appendChild(purchase);
@@ -104,7 +104,11 @@ public class PurchaseXMLManager {
                 Element customer = document.createElement("customer");
                 customer.appendChild(document.createTextNode(p.getCustomerId().getLastName()+" "+p.getCustomerId().getFirstName()));
                 purchase.appendChild(customer);
-            }
+            
+                // customer elements
+                Element retries = document.createElement("retries");
+                customer.appendChild(document.createTextNode(p.getCustomerId().getLastName()+" "+p.getCustomerId().getFirstName()));
+                purchase.appendChild(customer);
             
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             DOMSource source = new DOMSource(document);      
